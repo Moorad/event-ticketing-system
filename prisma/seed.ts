@@ -15,6 +15,12 @@ async function main() {
 	await prisma.event.createMany({
 		data: fakeEvents,
 	});
+
+	await prisma.customer.create({
+		data: {
+			username: "Moorad",
+		},
+	});
 }
 
 main()

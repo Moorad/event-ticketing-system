@@ -1,3 +1,4 @@
+import BuyTicketForm from "@/components/BuyTicketForm";
 import { PrismaClient } from "@prisma/client";
 
 export default async function Event({ params }: { params: { id: string } }) {
@@ -17,6 +18,8 @@ export default async function Event({ params }: { params: { id: string } }) {
 			<div>ID: {data.id}</div>
 			<div>Name: {data.name}</div>
 			<div>Description: {data.description}</div>
+
+			<BuyTicketForm eventId={data.id} customerId={1} />
 		</div>
 	);
 }

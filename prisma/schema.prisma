@@ -10,8 +10,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Customer {
+  id       Int      @id @default(autoincrement())
+  username String   @unique
+  Ticket   Ticket[]
+}
+
 model Event {
-  id          Int    @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
-  description String @default("No description.")
+  description String   @default("No description.")
+  Ticket      Ticket[]
+}
+
+model Ticket {
+  id          Int      @id @default(autoincrement())
+  type        String
+  event       Event    @relation(fields: [event_id], references: [id])
+  event_id    Int
+  customer    Customer @relation(fields: [customer_id], references: [id])
+  customer_id Int
 }
