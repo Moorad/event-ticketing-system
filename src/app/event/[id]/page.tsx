@@ -9,7 +9,9 @@ export default async function Event({ params }: { params: { id: string } }) {
 		},
 	});
 
-	if (data == null) {
+	const ticketTypes = await prisma.ticketType.findMany();
+
+	if (data == null || ticketTypes == null) {
 		return <div>ID not found</div>;
 	}
 
@@ -19,7 +21,11 @@ export default async function Event({ params }: { params: { id: string } }) {
 			<div>Name: {data.name}</div>
 			<div>Description: {data.description}</div>
 
-			<BuyTicketForm eventId={data.id} customerId={1} />
+			<BuyTicketForm
+				eventId={data.id}
+				customerId={1}
+				ticketTypes={ticketTypes}
+			/>
 		</div>
 	);
 }

@@ -24,10 +24,18 @@ model Event {
 }
 
 model Ticket {
-  id          Int      @id @default(autoincrement())
+  id          Int        @id @default(autoincrement())
+  ticket_type TicketType @relation(fields: [type], references: [type])
   type        String
-  event       Event    @relation(fields: [event_id], references: [id])
+  event       Event      @relation(fields: [event_id], references: [id])
   event_id    Int
-  customer    Customer @relation(fields: [customer_id], references: [id])
+  customer    Customer   @relation(fields: [customer_id], references: [id])
   customer_id Int
+  count       Int
+}
+
+model TicketType {
+  type   String   @id
+  cost   Decimal
+  Ticket Ticket[]
 }

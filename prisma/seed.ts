@@ -21,6 +21,14 @@ async function main() {
 			username: "Moorad",
 		},
 	});
+
+	await prisma.ticketType.createMany({
+		data: [
+			{ type: "Regular", cost: 9.99 },
+			{ type: "VIP", cost: 19.99 },
+			{ type: "Children", cost: 5.99 },
+		],
+	});
 }
 
 main()
