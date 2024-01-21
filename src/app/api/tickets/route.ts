@@ -7,21 +7,14 @@ export async function POST(request: Request) {
 
 	const body = await request.json();
 
-	// Ugly transformation
-	let payload = Object.entries(body.selectedTickets)
-		.filter(([_, value]: any) => {
-			return value > 0;
-		})
-		.map(([key, value]) => ({
-			type: key,
-			event_id: body.event_id,
-			customer_id: body.customer_id,
-			count: value,
-		})) as Ticket[];
+	let payload = {
+		type: body.type,
+		event_id: body.event_id,
+		customer_id: body.customer_id,
+		count: 1,
+	};
 
-	console.log(payload);
-
-	await prisma.ticket.createMany({
+	await prisma.ticket.create({
 		data: payload,
 	});
 
