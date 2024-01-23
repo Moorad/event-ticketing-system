@@ -16,9 +16,10 @@ async function main() {
 		data: fakeEvents,
 	});
 
-	await prisma.customer.create({
+	await prisma.user.create({
 		data: {
 			username: "Moorad",
+			email: "moorad@mail.com",
 		},
 	});
 

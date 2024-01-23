@@ -10,17 +10,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Customer {
-  id       Int      @id @default(autoincrement())
-  username String   @unique
-  Ticket   Ticket[]
+model Account {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  password      String
+  user_id       Int
+  role          String
+  session_token Int
+  expires       DateTime
+  user          User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id       Int       @id @default(autoincrement())
+  username String    @unique
+  tickets  Ticket[]
+  accounts Account[]
 }
 
 model Event {
   id          Int      @id @default(autoincrement())
   name        String
   description String   @default("No description.")
-  Ticket      Ticket[]
+  tickets     Ticket[]
 }
 
 model Ticket {
@@ -29,8 +41,8 @@ model Ticket {
   type        String
   event       Event      @relation(fields: [event_id], references: [id])
   event_id    Int
-  customer    Customer   @relation(fields: [customer_id], references: [id])
-  customer_id Int
+  user        User       @relation(fields: [user_id], references: [id])
+  user_id     Int
   count       Int
 }
 

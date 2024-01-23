@@ -4,7 +4,7 @@ import { PrismaClient } from "@prisma/client";
 export default async function Wallet() {
 	const prisma = new PrismaClient();
 	const data = await prisma.ticket.findMany({
-		where: { customer_id: 1 },
+		where: { user_id: 1 },
 		include: {
 			event: true,
 		},
