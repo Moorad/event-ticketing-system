@@ -1,4 +1,4 @@
-import { pbkdf2 } from "crypto";
+import { pbkdf2 } from "node:crypto";
 
 const hashPwConfig = {
 	iterations: 50000,
