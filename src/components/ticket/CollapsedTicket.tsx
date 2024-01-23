@@ -14,7 +14,7 @@ export default function CollapsedTicket(props: { data: TicketWithEvent }) {
 				</div>
 			</div>
 			<div>Event: </div>
-			<div>Customer ID: {props.data.customer_id}</div>
+			<div>User ID: {props.data.user_id}</div>
 			<Perforation />
 			<div className="py-3 px-3 text-center">View ticket</div>
 		</div>

@@ -23,7 +23,7 @@ export default function BuyTicketForm(props: {
 		const response = await fetch("/api/tickets", {
 			method: "POST",
 			body: JSON.stringify({
-				customer_id: props.customerId,
+				user_id: props.customerId,
 				event_id: props.eventId,
 				type: ticketType,
 			}),
