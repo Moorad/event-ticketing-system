@@ -4,9 +4,10 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { z } from "zod";
 import bcrypt from "bcrypt";
 
-const saltRounds = 10;
-
 export const options: NextAuthOptions = {
+	pages: {
+		signIn: "/auth/sign-in",
+	},
 	providers: [
 		CredentialsProvider({
 			name: "credentials",
@@ -14,51 +15,39 @@ export const options: NextAuthOptions = {
 				email: {
 					label: "Email address",
 					type: "text",
-					placeholder: "example@mail.com",
 				},
 				password: { label: "Password", type: "password" },
 			},
 			async authorize(credentials) {
-				console.log("start");
 				const prisma = new PrismaClient();
-				// validation
 				const validCredentials = z
 					.object({
-						email: z.string().email(),
+						email: z.string().email().toLowerCase(),
 						password: z.string().min(8),
 					})
 					.safeParse(credentials);
 
+				// Failed validation
 				if (!validCredentials.success) {
 					return null;
 				}
 
-				console.log("valid cred");
-
 				const { email, password } = validCredentials.data;
-
 				const account = await prisma.account.findUnique({
 					where: {
 						email: email,
 					},
 				});
 
-				console.log("account found");
-
 				// Account not found
 				if (account == null) {
 					return null;
 				}
 
-				const pw = await bcrypt.hash(password, saltRounds);
-				console.log(pw);
-
 				const passwordsMatch = await bcrypt.compare(
 					password,
 					account.password
 				);
-
-				console.log("password match");
 
 				// Passwords do not match
 				if (!passwordsMatch) {
@@ -70,28 +59,19 @@ export const options: NextAuthOptions = {
 		}),
 	],
 	callbacks: {
-		async session({ session, token }) {
-			console.log("--- session ---");
-			console.log(session);
-			console.log(token);
-
-			if (session?.user) {
-				session.user.id = token.sub;
-			}
-
-			return session;
-		},
-		async jwt({ token, account, user }) {
-			console.log("--- jwt ---");
-			console.log(token);
-			console.log(account);
-			console.log(user);
-
+		async jwt({ token, user }) {
 			if (user) {
-				token.id = account?.userId;
+				token.id = user.id;
 			}
 
 			return token;
+		},
+		async session({ session, token }) {
+			if (session.user) {
+				session.user.id = String(token.id);
+			}
+
+			return session;
 		},
 	},
 };

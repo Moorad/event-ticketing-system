@@ -2,52 +2,50 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
 }
 
 model Account {
-  id            String   @id @default(cuid())
-  email         String   @unique
-  password      String
-  user_id       Int
-  role          String
-  session_token Int
-  expires       DateTime
-  user          User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    id       String @id @default(cuid())
+    email    String @unique
+    password String
+    user_id  Int
+    role     String
+    user     User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
 model User {
-  id       Int       @id @default(autoincrement())
-  username String    @unique
-  tickets  Ticket[]
-  accounts Account[]
+    id        Int       @id @default(autoincrement())
+    full_name String    @unique
+    tickets   Ticket[]
+    accounts  Account[]
 }
 
 model Event {
-  id          Int      @id @default(autoincrement())
-  name        String
-  description String   @default("No description.")
-  tickets     Ticket[]
+    id          Int      @id @default(autoincrement())
+    name        String
+    description String   @default("No description.")
+    tickets     Ticket[]
 }
 
 model Ticket {
-  id          Int        @id @default(autoincrement())
-  ticket_type TicketType @relation(fields: [type], references: [type])
-  type        String
-  event       Event      @relation(fields: [event_id], references: [id])
-  event_id    Int
-  user        User       @relation(fields: [user_id], references: [id])
-  user_id     Int
-  count       Int
+    id          Int        @id @default(autoincrement())
+    ticket_type TicketType @relation(fields: [type], references: [type])
+    type        String
+    event       Event      @relation(fields: [event_id], references: [id])
+    event_id    Int
+    user        User       @relation(fields: [user_id], references: [id])
+    user_id     Int
+    count       Int
 }
 
 model TicketType {
-  type   String   @id
-  cost   Decimal
-  Ticket Ticket[]
+    type   String   @id
+    cost   Decimal
+    Ticket Ticket[]
 }
