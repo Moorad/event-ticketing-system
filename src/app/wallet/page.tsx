@@ -1,5 +1,6 @@
 import CollapsedTicket from "@/components/ticket/CollapsedTicket";
 import { PrismaClient } from "@prisma/client";
+import { getServerSession } from "next-auth";
 
 export default async function Wallet() {
 	const prisma = new PrismaClient();
@@ -10,7 +11,9 @@ export default async function Wallet() {
 		},
 	});
 
-	console.log(data);
+	const session = await getServerSession();
+
+	console.log(session);
 
 	return (
 		<div>

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import NavigationBar from "@/components/NavigationBar";
+import { SessionProvider } from "next-auth/react";
+import type { Session } from "next-auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,15 +14,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
 	children,
-}: {
+}: // pageProps: { session, ...pageProps },
+{
 	children: React.ReactNode;
+	// pageProps: { session: Session | null | undefined };
 }) {
 	return (
+		// <SessionProvider session={session ?? null}>
 		<html lang="en">
 			<body className={inter.className}>
 				<NavigationBar />
 				{children}
 			</body>
 		</html>
+		// </SessionProvider>
 	);
 }
