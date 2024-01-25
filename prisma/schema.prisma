@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Account {
-    id       String @id @default(cuid())
+    id       Int    @id @default(autoincrement())
     email    String @unique
     password String
     user_id  Int
@@ -21,7 +21,7 @@ model Account {
 
 model User {
     id        Int       @id @default(autoincrement())
-    full_name String    @unique
+    full_name String
     tickets   Ticket[]
     accounts  Account[]
 }
