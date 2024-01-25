@@ -1,13 +1,10 @@
 "use client";
 
-import LoaderButton from "./LoaderButton";
+import LoadingButton from "./LoadingButton";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import TicketCounter from "./TicketCounter";
 import { Prisma } from "@prisma/client";
-import { zerosObject } from "@/utils/object";
-import { numberFormat } from "@/utils/format";
 
 export default function BuyTicketForm(props: {
 	eventId: number;
@@ -40,16 +37,18 @@ export default function BuyTicketForm(props: {
 		<form>
 			<div>
 				{props.ticketTypes.map((tt, i) => (
-					<div>
+					<div key={i}>
 						<div>{tt.type}</div>
-						<LoaderButton
+						<LoadingButton
 							loading={formSubmitted}
 							onClick={() => {
 								console.log(tt.type);
 								submitForm(tt.type);
 							}}
-							text="Buy a ticket"
-						/>
+							className="bg-gray-300 px-2 py-1 rounded disabled:bg-gray-100"
+						>
+							Buy a ticket
+						</LoadingButton>
 					</div>
 				))}
 			</div>

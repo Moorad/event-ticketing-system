@@ -1,4 +1,5 @@
 import EventBlock from "@/components/EventBlock";
+import NavigationBar from "@/components/NavigationBar";
 import { PrismaClient } from "@prisma/client";
 
 export default async function Home() {
@@ -7,6 +8,7 @@ export default async function Home() {
 
 	return (
 		<div>
+			<NavigationBar />
 			<div>Available events:</div>
 			<div className="flex flex-wrap gap-2">
 				{data.map((event) => (
