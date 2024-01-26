@@ -18,9 +18,15 @@ export async function POST(request: Request) {
 
 	// Failed validation
 	if (!validBody.success) {
-		return Response.json({
-			error: validBody.error,
-		});
+		return Response.json(
+			{
+				status: "error",
+				message: validBody.error.cause,
+			},
+			{
+				status: 403,
+			}
+		);
 	}
 
 	const accountExists = await prisma.account.findUnique({

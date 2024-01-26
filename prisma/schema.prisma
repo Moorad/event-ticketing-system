@@ -46,6 +46,6 @@ model Ticket {
 
 model TicketType {
     type   String   @id
-    cost   Decimal
+    cost   Float
     Ticket Ticket[]
 }

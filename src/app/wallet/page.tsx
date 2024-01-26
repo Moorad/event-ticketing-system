@@ -15,7 +15,7 @@ export default async function Wallet() {
 			Wallet page
 			<div className="flex flex-wrap gap-5 justify-evenly">
 				{data.map((ticket) => (
-					<CollapsedTicket data={ticket} />
+					<CollapsedTicket data={ticket} key={ticket.id} />
 				))}
 			</div>
 		</div>
