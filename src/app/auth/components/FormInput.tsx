@@ -1,16 +1,25 @@
-import { HTMLInputTypeAttribute } from "react";
+import {
+	HTMLInputTypeAttribute,
+	LegacyRef,
+	MutableRefObject,
+	forwardRef,
+} from "react";
 
-export default function FormInput({
-	name,
-	type,
-	placeholder,
-}: {
-	name: string | undefined;
-	type: HTMLInputTypeAttribute | undefined;
-	placeholder: string | undefined;
-}) {
+function FormInput(
+	{
+		name,
+		type,
+		placeholder,
+	}: {
+		name: string | undefined;
+		type: HTMLInputTypeAttribute | undefined;
+		placeholder: string | undefined;
+	},
+	ref: LegacyRef<HTMLInputElement> | undefined
+) {
 	return (
 		<input
+			ref={ref}
 			name={name}
 			type={type}
 			placeholder={placeholder}
@@ -18,3 +27,5 @@ export default function FormInput({
 		/>
 	);
 }
+
+export default forwardRef(FormInput);

@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { ReactNode } from "react";
+import { FormEvent, ReactNode } from "react";
 
 export default function FormContainer({
 	children,
 	title,
 	altMethod,
-	submitFunc,
+	onSubmit,
 }: {
 	children: ReactNode;
 	title: string;
@@ -14,7 +14,7 @@ export default function FormContainer({
 		text: string;
 		url: string;
 	};
-	submitFunc: (formData: FormData) => void;
+	onSubmit: (event: FormEvent<HTMLFormElement>) => void;
 }) {
 	return (
 		<div className="h-full flex flex-col gap-12">
@@ -39,7 +39,7 @@ export default function FormContainer({
 					</Link>
 				</div>
 			</div>
-			<form action={submitFunc} className="flex flex-col flex-1 gap-5">
+			<form onSubmit={onSubmit} className="flex flex-col flex-1 gap-5">
 				{children}
 			</form>
 		</div>

@@ -1,3 +1,4 @@
+import { naturalLanguageCombine } from "@/utils/format";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { z } from "zod";
@@ -10,18 +11,27 @@ export async function POST(request: Request) {
 
 	const validBody = z
 		.object({
-			fullName: z.string().min(3),
-			email: z.string().email(),
-			password: z.string().min(8),
+			fullName: z.string().min(3, {
+				message: "full name must contain at least 3 characters",
+			}),
+			email: z.string().email({
+				message: "invalid email format",
+			}),
+			password: z.string().min(8, {
+				message: "password must contain at least 3 characters",
+			}),
 		})
 		.safeParse(body);
 
 	// Failed validation
 	if (!validBody.success) {
+		const errors = naturalLanguageCombine(
+			validBody.error.issues.map((err) => err.message)
+		);
 		return Response.json(
 			{
 				status: "error",
-				message: validBody.error.cause,
+				message: errors,
 			},
 			{
 				status: 403,
@@ -37,9 +47,15 @@ export async function POST(request: Request) {
 
 	// Account does not exists
 	if (accountExists) {
-		return Response.json({
-			error: "An account with the same email already exists",
-		});
+		return Response.json(
+			{
+				status: "error",
+				message: "An account with the same email already exists",
+			},
+			{
+				status: 403,
+			}
+		);
 	}
 
 	// Create account
