@@ -9,8 +9,8 @@ export async function POST(request: Request) {
 
 	let payload = {
 		type: body.type,
-		event_id: body.event_id,
-		user_id: body.user_id,
+		eventId: body.eventId,
+		userId: body.userId,
 		count: 1,
 	};
 

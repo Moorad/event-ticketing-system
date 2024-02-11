@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import type { NextAuthOptions } from "next-auth";
+import type { NextAuthOptions, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { z } from "zod";
 import bcrypt from "bcrypt";
@@ -18,7 +18,7 @@ export const options: NextAuthOptions = {
 				},
 				password: { label: "Password", type: "password" },
 			},
-			async authorize(credentials) {
+			async authorize(credentials): Promise<User | null> {
 				const prisma = new PrismaClient();
 				const validCredentials = z
 					.object({
@@ -54,7 +54,12 @@ export const options: NextAuthOptions = {
 					return null;
 				}
 
-				return account;
+				return {
+					id: String(account.userId),
+					name: undefined,
+					email: account.email,
+					image: undefined,
+				};
 			},
 		}),
 	],
@@ -68,7 +73,7 @@ export const options: NextAuthOptions = {
 		},
 		async session({ session, token }) {
 			if (session.user) {
-				session.user.id = String(token.id);
+				session.user.id = Number(token.id);
 			}
 
 			return session;

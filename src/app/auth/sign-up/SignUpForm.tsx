@@ -63,7 +63,7 @@ export default function SignUpForm() {
 			<FormError>{error}</FormError>
 			<FormInput
 				ref={fullNameRef}
-				name="full_name"
+				name="fullName"
 				type="text"
 				placeholder="Full name"
 			/>

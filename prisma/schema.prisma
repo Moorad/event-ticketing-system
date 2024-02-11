@@ -10,20 +10,21 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+model User {
+    id       Int      @id @default(autoincrement())
+    fullName String
+    account  Account?
+    tickets  Ticket[]
+    role     Role     @relation(fields: [roleId], references: [id])
+    roleId   Int
+}
+
 model Account {
     id       Int    @id @default(autoincrement())
     email    String @unique
     password String
-    user_id  Int
-    role     String
-    user     User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
-}
-
-model User {
-    id        Int       @id @default(autoincrement())
-    full_name String
-    tickets   Ticket[]
-    accounts  Account[]
+    user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId   Int    @unique
 }
 
 model Event {
@@ -34,18 +35,41 @@ model Event {
 }
 
 model Ticket {
-    id          Int        @id @default(autoincrement())
-    ticket_type TicketType @relation(fields: [type], references: [type])
-    type        String
-    event       Event      @relation(fields: [event_id], references: [id])
-    event_id    Int
-    user        User       @relation(fields: [user_id], references: [id])
-    user_id     Int
-    count       Int
+    id         Int        @id @default(autoincrement())
+    ticketType TicketType @relation(fields: [type], references: [type])
+    type       String
+    event      Event      @relation(fields: [eventId], references: [id])
+    eventId    Int
+    user       User       @relation(fields: [userId], references: [id])
+    userId     Int
+    count      Int
 }
 
 model TicketType {
     type   String   @id
     cost   Float
-    Ticket Ticket[]
+    ticket Ticket[]
+}
+
+// Role-based permissions
+model Role {
+    id          Int              @id @default(autoincrement())
+    name        String
+    permissions RolePermission[]
+    User        User[]
+}
+
+model Permission {
+    id          Int              @id @default(autoincrement())
+    description String
+    roles       RolePermission[]
+}
+
+model RolePermission {
+    role         Role       @relation(fields: [roleId], references: [id])
+    roleId       Int
+    permission   Permission @relation(fields: [permissionId], references: [id])
+    permissionId Int
+
+    @@id([roleId, permissionId])
 }

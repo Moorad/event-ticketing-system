@@ -66,7 +66,12 @@ export async function POST(request: Request) {
 
 	const user = await prisma.user.create({
 		data: {
-			full_name: validBody.data.fullName,
+			fullName: validBody.data.fullName,
+			role: {
+				connect: {
+					id: 1, // Default role: Consumer
+				},
+			},
 		},
 	});
 
@@ -74,8 +79,7 @@ export async function POST(request: Request) {
 		data: {
 			email: validBody.data.email,
 			password: hashedPassword,
-			user_id: user.id,
-			role: "User",
+			userId: user.id,
 		},
 	});
 
