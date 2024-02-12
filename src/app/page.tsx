@@ -1,5 +1,5 @@
 import EventBlock from "@/components/EventBlock";
-import NavigationBar from "@/components/NavigationBar";
+import NavigationBar from "@/components/navigation-bar/NavigationBar";
 import prisma from "@/utils/db";
 
 export default async function Home() {

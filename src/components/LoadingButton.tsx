@@ -4,11 +4,13 @@ export default function LoadingButton({
 	children,
 	loading,
 	className,
+	loaderColor = "#FFFFFF",
 	onClick,
 }: {
 	children: ReactNode;
 	loading: boolean;
 	className?: string;
+	loaderColor?: string;
 	onClick?: () => any;
 }) {
 	return (
@@ -18,7 +20,17 @@ export default function LoadingButton({
 			type="submit"
 			className={className}
 		>
-			{loading ? "Submitting..." : children}
+			{loading ? (
+				<div
+					className="loader"
+					style={{
+						borderColor: loaderColor + "80",
+						borderRightColor: loaderColor,
+					}}
+				></div>
+			) : (
+				children
+			)}
 		</button>
 	);
 }

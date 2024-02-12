@@ -25,7 +25,6 @@ export default function SignInForm() {
 			signIn("credentials", {
 				email: emailRef.current?.value,
 				password: passwordRef.current?.value,
-				callbackUrl: "/",
 				redirect: false,
 			}).then((results) => {
 				if (results?.ok) {
