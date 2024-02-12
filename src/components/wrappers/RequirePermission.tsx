@@ -1,5 +1,5 @@
 import { options } from "@/app/api/auth/[...nextauth]/options";
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/utils/db";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
@@ -10,7 +10,6 @@ export default async function RequirePermission({
 	children: React.ReactNode;
 	permissionId: number;
 }) {
-	const prisma = new PrismaClient();
 	const session = await getServerSession(options);
 
 	let userPermissions = await prisma.user.findFirst({

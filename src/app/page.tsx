@@ -1,9 +1,8 @@
 import EventBlock from "@/components/EventBlock";
 import NavigationBar from "@/components/NavigationBar";
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/utils/db";
 
 export default async function Home() {
-	const prisma = new PrismaClient();
 	const data = await prisma.event.findMany();
 
 	return (

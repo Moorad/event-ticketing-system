@@ -1,8 +1,7 @@
 import CollapsedTicket from "@/components/ticket/CollapsedTicket";
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/utils/db";
 
 export default async function Wallet() {
-	const prisma = new PrismaClient();
 	const data = await prisma.ticket.findMany({
 		where: { userId: 1 },
 		include: {

@@ -1,12 +1,11 @@
 import { naturalLanguageCombine } from "@/utils/format";
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/utils/db";
 import bcrypt from "bcrypt";
 import { z } from "zod";
 
 const saltRounds = 10;
 
 export async function POST(request: Request) {
-	const prisma = new PrismaClient();
 	const body = await request.json();
 
 	const validBody = z
@@ -18,7 +17,7 @@ export async function POST(request: Request) {
 				message: "invalid email format",
 			}),
 			password: z.string().min(8, {
-				message: "password must contain at least 3 characters",
+				message: "password must contain at least 8 characters",
 			}),
 		})
 		.safeParse(body);

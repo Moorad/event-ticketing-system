@@ -1,6 +1,6 @@
-import { PrismaClient, Prisma } from "@prisma/client";
+import prisma from "@/utils/db";
+import type { Prisma } from "@prisma/client";
 import bcrypt from "bcrypt";
-const prisma = new PrismaClient();
 
 async function main() {
 	// Available ticket types

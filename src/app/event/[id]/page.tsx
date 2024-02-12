@@ -1,8 +1,7 @@
 import BuyTicketForm from "@/components/BuyTicketForm";
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/utils/db";
 
 export default async function Event({ params }: { params: { id: string } }) {
-	const prisma = new PrismaClient();
 	const data = await prisma.event.findUnique({
 		where: {
 			id: Number(params.id),

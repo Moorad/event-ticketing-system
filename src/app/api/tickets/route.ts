@@ -1,10 +1,8 @@
-import { PrismaClient, Ticket } from "@prisma/client";
+import prisma from "@/utils/db";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
-	const prisma = new PrismaClient();
-
 	const body = await request.json();
 
 	let payload = {
