@@ -1,16 +1,18 @@
-import BuyTicketForm from "@/components/BuyTicketForm";
 import { prisma } from "database";
+import Link from "next/link";
 
-export default async function Event({ params }: { params: { id: string } }) {
+export default async function eventIdPage({
+	params,
+}: {
+	params: { id: string };
+}) {
 	const data = await prisma.event.findUnique({
 		where: {
 			id: Number(params.id),
 		},
 	});
 
-	const ticketTypes = await prisma.ticketType.findMany();
-
-	if (data == null || ticketTypes == null) {
+	if (data == null) {
 		return <div>ID not found</div>;
 	}
 
@@ -19,12 +21,11 @@ export default async function Event({ params }: { params: { id: string } }) {
 			<div>ID: {data.id}</div>
 			<div>Name: {data.name}</div>
 			<div>Description: {data.description}</div>
-
-			<BuyTicketForm
-				eventId={data.id}
-				customerId={1}
-				ticketTypes={ticketTypes}
-			/>
+			<Link href={`/event/${params.id}/purchase`}>
+				<button className="bg-blue-500 text-white px-2 py-1 rounded mt-5 hover:bg-blue-600">
+					Purchase ticket
+				</button>
+			</Link>
 		</div>
 	);
 }

@@ -1,0 +1,10 @@
+{
+	"QUEUE_NAME": "waiting-users",
+	"EXCHANGE_NAME": "waiting-users-exchange",
+	"QUEUE_MIRROR_SET_NAME": "queue-mirror",
+	"ACTIVE_USERS_SET_NAME": "active-users",
+	"MAX_ACTIVE_USERS": 20,
+	"ACTIVE_USER_TTL": 60000,
+	"EXPIRY_CHECK_INTERVAL": 1000,
+	"VERBOSE": true
+}

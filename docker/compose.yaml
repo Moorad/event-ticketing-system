@@ -9,7 +9,7 @@ services:
             POSTGRES_PASSWORD: root
             POSTGRES_DB: ets-db
     rabbitmq:
-        image: rabbitmq
+        image: rabbitmq:management
         restart: always
         ports:
             - 5672:5672
@@ -17,3 +17,8 @@ services:
         environment:
             RABBITMQ_DEFAULT_USER: root
             RABBITMQ_DEFAULT_PASS: root
+    redis:
+        image: redis
+        restart: always
+        ports:
+            - 6379:6379

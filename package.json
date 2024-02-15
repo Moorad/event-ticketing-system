@@ -19,7 +19,9 @@
 	"author": "Moorad",
 	"license": "ISC",
 	"devDependencies": {
+		"@types/node": "^20.11.7",
+		"dotenv-cli": "^7.3.0",
 		"turbo": "latest",
-		"dotenv-cli": "^7.3.0"
+		"typescript": "^5.3.3"
 	}
 }
