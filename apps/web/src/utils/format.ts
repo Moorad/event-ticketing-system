@@ -2,6 +2,22 @@ export function numberFormat(num: number, dp: number) {
 	return Math.floor(num * 10 ** dp) / 10 ** dp;
 }
 
+export function formatTimeLeft(milliseconds: number) {
+	let minutes = Math.floor((milliseconds / 1000) / 60) % 60
+	let hours = Math.floor((milliseconds / 1000) / 60 / 60)
+	let formattedString = "";
+	if (hours > 0) {
+		formattedString += hours + "h";
+	}
+
+	if (minutes > 0 || (minutes <= 0 && hours <= 0)) {
+		formattedString += minutes + "min"
+	}
+
+	return formattedString;
+
+}
+
 export function naturalLanguageCombine(strs: string[]) {
 	let sentence = "";
 	for (let i = 0; i < strs.length; i++) {

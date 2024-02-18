@@ -1,7 +1,7 @@
 import QueuePage, { QueueInformation } from "./components/QueuePage";
 import PurchasePage, { ActiveInformation } from "./components/PurchasePage";
 
-type Response = QueueInformation | ActiveInformation;
+export type Response = QueueInformation | ActiveInformation;
 
 export default async function Event({ params }: { params: { id: string } }) {
 	const qmRes = await fetch("http://localhost:4000/queue/check", {
@@ -19,7 +19,7 @@ export default async function Event({ params }: { params: { id: string } }) {
 	const queue = (await qmRes.json()) as Response;
 
 	if (queue.status == "waiting") {
-		return <QueuePage info={queue} />;
+		return <QueuePage params={params} info={queue} />;
 	}
 
 	return <PurchasePage eventId={params.id} info={queue} />;
