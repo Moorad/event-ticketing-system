@@ -1,14 +1,29 @@
 import { prisma } from "../client";
-import type { Prisma } from "@prisma/client";
+import type { EventLocation, Prisma } from "@prisma/client";
 import bcrypt from "bcrypt";
 
 async function main() {
 	// Available ticket types
 	await prisma.ticketType.createMany({
 		data: [
-			{ type: "Regular", cost: 9.99 },
-			{ type: "VIP", cost: 19.99 },
-			{ type: "Children", cost: 5.99 },
+			{
+				name: "Children",
+				description:
+					"Join the fun-filled event with our Children Ticket, specially designed to cater to our younger attendees. With this ticket, kids can enjoy access to all event areas and engage in exciting activities tailored just for them, ensuring a memorable experience for the little ones.",
+				cost: 5.99,
+			},
+			{
+				name: "Regular",
+				description:
+					"Secure your spot at the heart of the event with our Regular Ticket, offering unrestricted access to all event attractions and performances. Immerse yourself in the festivities, indulge in delicious food options, and participate in various interactive activities for a day of entertainment and enjoyment.",
+				cost: 9.99,
+			},
+			{
+				name: "VIP",
+				description:
+					"Elevate your event experience with our VIP Ticket, granting exclusive perks and privileges. Enjoy expedited entry, access to VIP lounges with complimentary refreshments, and premium seating for main stage performances. Dive into luxury and convenience while relishing the event in style with our VIP Ticket.",
+				cost: 19.99,
+			},
 		],
 	});
 
@@ -95,6 +110,19 @@ async function insertFakeData() {
 
 	await prisma.event.createMany({
 		data: fakeEvents,
+	});
+
+	let locations: Prisma.EventLocationCreateManyInput[] = [];
+
+	for (let i = 1; i <= 3; i++) {
+		locations.push({
+			eventId: 1,
+			name: "Location " + i,
+		});
+	}
+
+	await prisma.eventLocation.createMany({
+		data: locations,
 	});
 }
 

@@ -7,9 +7,9 @@ export default function FormContainer({
 	altMethod,
 	onSubmit,
 }: {
-	children: ReactNode;
-	title: string;
-	altMethod: {
+	children?: ReactNode;
+	title?: string;
+	altMethod?: {
 		name: string;
 		text: string;
 		url: string;
@@ -30,13 +30,17 @@ export default function FormContainer({
 				</div>
 				<div className="font-semibold text-2xl mb-2">{title}</div>
 				<div className="text-sm">
-					{altMethod.text + " "}
-					<Link
-						className="text-brand-red font-semibold"
-						href={altMethod.url}
-					>
-						{altMethod.name}
-					</Link>
+					{altMethod && (
+						<>
+							altMethod.text + " "
+							<Link
+								className="text-brand-red font-semibold"
+								href={altMethod.url}
+							>
+								{altMethod.name}
+							</Link>
+						</>
+					)}
 				</div>
 			</div>
 			<form onSubmit={onSubmit} className="flex flex-col flex-1 gap-5">

@@ -10,8 +10,11 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"database": "*",
+		"@fortawesome/fontawesome-svg-core": "^6.5.1",
+		"@fortawesome/free-solid-svg-icons": "^6.5.1",
+		"@fortawesome/react-fontawesome": "^0.2.0",
 		"bcrypt": "^5.1.1",
+		"database": "*",
 		"next": "14.0.4",
 		"next-auth": "^4.24.5",
 		"react": "^18.2.0",

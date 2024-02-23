@@ -27,6 +27,7 @@
 			"persistent": true
 		},
 		"db:reset": {},
+		"db:migrate": {},
 		"db:generate": {}
 	}
 }

@@ -28,27 +28,43 @@ model Account {
 }
 
 model Event {
-    id          Int      @id @default(autoincrement())
-    name        String
-    description String   @default("No description.")
-    tickets     Ticket[]
+    id            Int             @id @default(autoincrement())
+    name          String
+    description   String          @default("No description.")
+    tickets       Ticket[]
+    EventLocation EventLocation[]
+}
+
+model EventLocation {
+    id      Int      @id @default(autoincrement())
+    Event   Event    @relation(fields: [eventId], references: [id])
+    eventId Int
+    name    String
+    Ticket  Ticket[]
 }
 
 model Ticket {
-    id         Int        @id @default(autoincrement())
-    ticketType TicketType @relation(fields: [type], references: [type])
-    type       String
-    event      Event      @relation(fields: [eventId], references: [id])
-    eventId    Int
-    user       User       @relation(fields: [userId], references: [id])
-    userId     Int
-    count      Int
+    id             Int           @id @default(autoincrement())
+    ticketType     TicketType    @relation(fields: [type], references: [id])
+    type           Int
+    event          Event         @relation(fields: [eventId], references: [id])
+    eventId        Int
+    user           User          @relation(fields: [userId], references: [id])
+    userId         Int
+    EventLocation  EventLocation @relation(fields: [locationId], references: [id])
+    locationId     Int
+    associatedName String
+    seatNo         String
+    bookedDate     DateTime
+    createdAt      DateTime      @default(now())
 }
 
 model TicketType {
-    type   String   @id
-    cost   Float
-    ticket Ticket[]
+    id          Int      @id @default(autoincrement())
+    name        String
+    description String
+    cost        Float
+    ticket      Ticket[]
 }
 
 // Role-based permissions

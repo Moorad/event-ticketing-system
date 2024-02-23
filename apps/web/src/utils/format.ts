@@ -3,19 +3,22 @@ export function numberFormat(num: number, dp: number) {
 }
 
 export function formatTimeLeft(milliseconds: number) {
-	let minutes = Math.floor((milliseconds / 1000) / 60) % 60
-	let hours = Math.floor((milliseconds / 1000) / 60 / 60)
+	let minutes = Math.floor(milliseconds / 1000 / 60) % 60;
+	let hours = Math.floor(milliseconds / 1000 / 60 / 60);
 	let formattedString = "";
 	if (hours > 0) {
 		formattedString += hours + "h";
 	}
 
 	if (minutes > 0 || (minutes <= 0 && hours <= 0)) {
-		formattedString += minutes + "min"
+		formattedString += minutes + "min";
 	}
 
 	return formattedString;
+}
 
+export function arrayToBulletPoints(str: string[]) {
+	return str.reduce((acc, curr) => (acc += "\t• " + curr + "\n"), "");
 }
 
 export function naturalLanguageCombine(strs: string[]) {

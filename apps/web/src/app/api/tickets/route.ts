@@ -1,22 +1,22 @@
-import { prisma } from "database";
+// import { prisma } from "database";
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 
-export async function POST(request: Request) {
-	const body = await request.json();
+// export async function POST(request: Request) {
+// 	const body = await request.json();
 
-	let payload = {
-		type: body.type,
-		eventId: body.eventId,
-		userId: body.userId,
-		count: 1,
-	};
+// 	let payload = {
+// 		type: body.type,
+// 		eventId: body.eventId,
+// 		userId: body.userId,
+// 		count: 1,
+// 	};
 
-	await prisma.ticket.create({
-		data: payload,
-	});
+// 	await prisma.ticket.create({
+// 		data: payload,
+// 	});
 
-	return Response.json({
-		status: "success",
-	});
-}
+// 	return Response.json({
+// 		status: "success",
+// 	});
+// }

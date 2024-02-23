@@ -38,29 +38,36 @@ export default function SignInForm() {
 	}, [formSubmitted]);
 
 	return (
-		<FormContainer
-			title="Sign In"
-			altMethod={{
-				name: "Sign up",
-				text: "Don’t have an account?",
-				url: "/auth/sign-up",
-			}}
-			onSubmit={login}
-		>
-			<FormError>{error}</FormError>
-			<FormInput
-				ref={emailRef}
-				name="email"
-				type="email"
-				placeholder="Email address"
-			/>
-			<FormInput
-				ref={passwordRef}
-				name="password"
-				type="password"
-				placeholder="Password"
-			/>
-			<FormButton loading={formSubmitted} text="Login" />
-		</FormContainer>
+		<div className="h-full">
+			<div
+				className="bg-white w-96 px-8 py-8 rounded-md min-h-96
+		light-drop-shadow absolute-center"
+			>
+				<FormContainer
+					title="Sign In"
+					altMethod={{
+						name: "Sign up",
+						text: "Don’t have an account?",
+						url: "/auth/sign-up",
+					}}
+					onSubmit={login}
+				>
+					<FormError>{error}</FormError>
+					<FormInput
+						ref={emailRef}
+						name="email"
+						type="email"
+						placeholder="Email address"
+					/>
+					<FormInput
+						ref={passwordRef}
+						name="password"
+						type="password"
+						placeholder="Password"
+					/>
+					<FormButton loading={formSubmitted} text="Login" />
+				</FormContainer>
+			</div>
+		</div>
 	);
 }

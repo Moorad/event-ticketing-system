@@ -2,9 +2,13 @@
 	"name": "event-ticketing-system",
 	"version": "0.1.0",
 	"private": true,
+	"prisma": {
+		"schema": "./packages/database/prisma/schema.prisma"
+	  },
 	"scripts": {
 		"dev": "dotenv -- turbo run dev",
 		"db:reset": "dotenv -- turbo run db:reset",
+		"db:migrate": "dotenv -- turbo run db:migrate",
 		"db:generate": "turbo run db:generate"
 	},
 	"workspaces": [
