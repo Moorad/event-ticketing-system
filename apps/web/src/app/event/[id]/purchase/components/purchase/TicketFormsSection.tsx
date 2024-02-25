@@ -8,25 +8,14 @@ export default function TicketFormsSection({
 	error,
 }: {
 	addTicketHandler: Function;
-	error: string[] | null;
+	error: string | null;
 }) {
 	const ctx = useContext(TicketsContext);
 
 	return (
 		<div className="p-3 flex-grow overflow-y-auto h-full">
 			<div className="mb-5">
-				<FormError>
-					{error && (
-						<>
-							One or more of you tickets has the following errors:
-							<ul>
-								{error.map((err) => (
-									<li className="ml-4">• {err}</li>
-								))}
-							</ul>
-						</>
-					)}
-				</FormError>
+				<FormError>{error && <>{error}</>}</FormError>
 			</div>
 			<div className="flex flex-col gap-5">
 				{ctx.tickets.map((ticket, i) => (

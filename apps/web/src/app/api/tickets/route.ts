@@ -1,22 +1,35 @@
-// import { prisma } from "database";
+import { Prisma, prisma } from "database";
 
-// export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
 
-// export async function POST(request: Request) {
-// 	const body = await request.json();
+type ReqBodyType = {
+	eventId: number;
+	userId: number;
+	tickets: Record<string, string>[];
+};
 
-// 	let payload = {
-// 		type: body.type,
-// 		eventId: body.eventId,
-// 		userId: body.userId,
-// 		count: 1,
-// 	};
+export async function POST(request: Request) {
+	const body = (await request.json()) as ReqBodyType;
 
-// 	await prisma.ticket.create({
-// 		data: payload,
-// 	});
+	let payload: Prisma.TicketCreateManyInput[] = [];
 
-// 	return Response.json({
-// 		status: "success",
-// 	});
-// }
+	for (let i = 0; i < body.tickets.length; i++) {
+		payload.push({
+			type: Number(body.tickets[i].ticketType),
+			associatedName: body.tickets[i].attendeeName,
+			locationId: Number(body.tickets[i].location),
+			bookedDate: new Date(body.tickets[i].date),
+			seatNo: body.tickets[i].seatNo,
+			eventId: body.eventId,
+			userId: body.userId,
+		});
+	}
+
+	await prisma.ticket.createMany({
+		data: payload,
+	});
+
+	return Response.json({
+		status: "success",
+	});
+}

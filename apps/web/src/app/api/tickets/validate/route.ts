@@ -53,22 +53,21 @@ export async function POST(request: Request) {
 
 	// Failed validation
 	if (!validBody.success) {
-		console.log(validBody.error.issues);
 		const errors = new Set(
 			validBody.error.issues.map((err) => err.message)
 		);
 		return Response.json(
 			{
 				status: "error",
-				errors: Array.from(errors),
+				message: `One or more of you tickets has the following errors: ${Array.from(
+					errors
+				).map((err) => "\n• " + err)}`,
 			},
 			{
 				status: 403,
 			}
 		);
 	}
-
-	console.log(body);
 
 	return Response.json({
 		status: "success",

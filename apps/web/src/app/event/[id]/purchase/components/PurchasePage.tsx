@@ -12,7 +12,7 @@ import {
 import { Event, EventLocation, TicketType } from "database";
 import TicketTypeModal from "./purchase/TicketTypeModal";
 import { Session } from "next-auth";
-import FormError from "@/app/auth/components/FormError";
+import useFetch from "@/utils/hooks/useFetch";
 
 export type ActiveInformation = {
 	status: "active";
@@ -52,12 +52,9 @@ export default function PurchasePage({
 		RefObject<HTMLFormElement>[]
 	>([]);
 	const [isModalVisible, setModalVisiblity] = useState(false);
-	const [submitting, setSubmitting] = useState(false);
-	const [error, setError] = useState<string[] | null>(null);
+	const { loading, error, request } = useFetch("/api/tickets/validate");
 
 	async function handleCheckout() {
-		setSubmitting(true);
-		setError(null);
 		// Ugly
 		const allFormData = [];
 		for (let i = 0; i < ticketFormRefs.length; i++) {
@@ -83,7 +80,7 @@ export default function PurchasePage({
 			tickets: allFormData,
 		};
 
-		const res = await fetch("/api/tickets/validate", {
+		const res = await request({
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -91,18 +88,9 @@ export default function PurchasePage({
 			body: JSON.stringify(reqBody),
 		});
 
-		const body = await res.json();
-		if (!res.ok && body.status == "error") {
-			setError(body.errors);
-			setSubmitting(false);
-		} else {
+		if (res.ok) {
 			finishPurchase(reqBody);
 		}
-		// console.log("Fetch", {
-		// 	eventId: event.id,
-		// 	userId: session.user.id,
-		// 	tickets: allFormData,
-		// });
 	}
 
 	return (
@@ -128,7 +116,7 @@ export default function PurchasePage({
 					error={error}
 				/>
 				<SummarySection
-					submitting={submitting}
+					submitting={loading}
 					checkoutHandler={handleCheckout}
 				/>
 			</div>

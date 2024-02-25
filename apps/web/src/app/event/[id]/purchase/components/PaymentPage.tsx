@@ -1,11 +1,10 @@
-import FormContainer from "@/app/auth/components/FormContainer";
 import { ReqBodyType } from "./CheckoutRouter";
 import Input from "@/components/primitives/Input";
-import FormButton from "@/app/auth/components/FormButton";
-import { useState } from "react";
 import LoadingButton from "@/components/LoadingButton";
 import { TicketType } from "database";
 import { numberFormat } from "@/utils/format";
+import { useRouter } from "next/navigation";
+import useFetch from "@/utils/hooks/useFetch";
 
 export default function PaymentPage({
 	payload,
@@ -14,7 +13,8 @@ export default function PaymentPage({
 	payload: ReqBodyType | null;
 	ticketTypes: TicketType[];
 }) {
-	const [submitting, setSubmitting] = useState(false);
+	const router = useRouter();
+	const { loading, error, request } = useFetch("/api/tickets");
 
 	function computeTotal() {
 		if (payload) {
@@ -34,6 +34,20 @@ export default function PaymentPage({
 		}
 
 		return 0;
+	}
+
+	async function handleSubmission() {
+		const res = await request({
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(payload),
+		});
+
+		if (res.ok) {
+			router.push("/wallet");
+		}
 	}
 
 	return (
@@ -79,7 +93,8 @@ export default function PaymentPage({
 					</div>
 					<LoadingButton
 						className="bg-brand-red mt-12 w-full text-white rounded py-2"
-						loading={submitting}
+						loading={loading}
+						onClick={handleSubmission}
 					>
 						Submit
 					</LoadingButton>
