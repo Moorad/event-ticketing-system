@@ -14,9 +14,7 @@ export default function TicketFormsSection({
 
 	return (
 		<div className="p-3 flex-grow overflow-y-auto h-full">
-			<div className="mb-5">
-				<FormError>{error && <>{error}</>}</FormError>
-			</div>
+			<FormError className="mb-5">{error && <>{error}</>}</FormError>
 			<div className="flex flex-col gap-5">
 				{ctx.tickets.map((ticket, i) => (
 					<TicketForm

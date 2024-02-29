@@ -1,5 +1,5 @@
 import QueuePage, { QueueInformation } from "./components/QueuePage";
-import PurchasePage, { ActiveInformation } from "./components/PurchasePage";
+import { ActiveInformation } from "./components/PurchasePage";
 import { prisma } from "database";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";

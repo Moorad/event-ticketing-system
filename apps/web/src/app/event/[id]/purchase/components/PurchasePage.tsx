@@ -103,7 +103,7 @@ export default function PurchasePage({
 				event: event,
 			}}
 		>
-			<div className="flex-grow flex justify-center gap-1 overflow-y-clip">
+			<div className="flex-grow flex max-md:flex-col justify-center gap-1 overflow-y-clip">
 				<TicketTypeModal
 					ticketTypes={ticketTypes}
 					isVisible={isModalVisible}

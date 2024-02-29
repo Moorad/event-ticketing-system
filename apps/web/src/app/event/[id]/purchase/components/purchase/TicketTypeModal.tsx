@@ -1,14 +1,8 @@
-"use cleint";
+"use client";
 import Modal from "@/components/primitives/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTicket } from "@fortawesome/free-solid-svg-icons";
-import {
-	Dispatch,
-	SetStateAction,
-	createRef,
-	useContext,
-	useState,
-} from "react";
+import { Dispatch, SetStateAction, createRef, useContext } from "react";
 import { TicketsContext } from "../PurchasePage";
 import { TicketType } from "database";
 export default function TicketTypeModal({

@@ -22,7 +22,7 @@ export default function SummarySection({
 	}
 
 	return (
-		<div className="p-3" style={{ minWidth: "25vw" }}>
+		<div className="p-3 md:min-w-[25vw] max-md:min-h-[25vh]">
 			<div className="bg-white rounded light-drop-shadow h-full p-5 flex flex-col">
 				<div className="text-xl font-semibold pb-5">Summary</div>
 				<hr />
