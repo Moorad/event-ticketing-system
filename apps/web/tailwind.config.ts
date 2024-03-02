@@ -15,7 +15,8 @@ const config: Config = {
 			},
 			colors: {
 				"brand-red": "#ef233c",
-				"brand-black": "#2b2d42"
+				"brand-black": "#2b2d42",
+				"brand-gray": "#f3f3f7",
 			},
 		},
 	},

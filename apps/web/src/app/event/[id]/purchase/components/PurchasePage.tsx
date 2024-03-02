@@ -52,7 +52,7 @@ export default function PurchasePage({
 		RefObject<HTMLFormElement>[]
 	>([]);
 	const [isModalVisible, setModalVisiblity] = useState(false);
-	const { loading, error, request } = useFetch("/api/tickets/validate");
+	const { loading, error, request } = useFetch();
 
 	async function handleCheckout() {
 		// Ugly
@@ -80,7 +80,7 @@ export default function PurchasePage({
 			tickets: allFormData,
 		};
 
-		const res = await request({
+		const res = await request("/api/tickets/validate", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

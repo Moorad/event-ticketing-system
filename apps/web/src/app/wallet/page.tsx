@@ -1,22 +1,29 @@
-import CollapsedTicket from "@/components/ticket/CollapsedTicket";
 import { prisma } from "database";
+import type { Event, Ticket, TicketType } from "database";
+import WalletPage from "./components/WalletPage";
+
+export type SparseTicket = Pick<Ticket, "id"> & {
+	event: Pick<Event, "name">;
+	ticketType: Pick<TicketType, "name">;
+};
 
 export default async function Wallet() {
 	const data = await prisma.ticket.findMany({
 		where: { userId: 1 },
-		include: {
-			event: true,
+		select: {
+			id: true,
+			event: {
+				select: {
+					name: true,
+				},
+			},
+			ticketType: {
+				select: {
+					name: true,
+				},
+			},
 		},
 	});
 
-	return (
-		<div>
-			Wallet page
-			<div className="flex flex-wrap gap-5 justify-evenly">
-				{data.map((ticket) => (
-					<CollapsedTicket data={ticket} key={ticket.id} />
-				))}
-			</div>
-		</div>
-	);
+	return <WalletPage tickets={data} />;
 }

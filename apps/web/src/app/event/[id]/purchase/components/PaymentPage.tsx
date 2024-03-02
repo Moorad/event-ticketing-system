@@ -14,7 +14,7 @@ export default function PaymentPage({
 	ticketTypes: TicketType[];
 }) {
 	const router = useRouter();
-	const { loading, error, request } = useFetch("/api/tickets");
+	const { loading, error, request } = useFetch();
 
 	function computeTotal() {
 		if (payload) {
@@ -37,7 +37,7 @@ export default function PaymentPage({
 	}
 
 	async function handleSubmission() {
-		const res = await request({
+		const res = await request("/api/tickets", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

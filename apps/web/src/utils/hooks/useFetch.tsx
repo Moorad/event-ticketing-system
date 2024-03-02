@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-export default function useFetch(url: string) {
+export default function useFetch() {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 
-	async function request(reqOptions: RequestInit) {
+	async function request(url: string, reqOptions: RequestInit) {
 		setLoading(true);
 		setError(null);
 
@@ -13,9 +13,10 @@ export default function useFetch(url: string) {
 		const body = await response.json();
 
 		if (!response.ok && body.status == "error") {
-			setLoading(false);
 			setError(body.message);
 		}
+
+		setLoading(false);
 
 		return { ok: response.ok, details: response, body };
 	}
