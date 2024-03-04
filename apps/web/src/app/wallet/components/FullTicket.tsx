@@ -71,7 +71,7 @@ export default function FullTicket({ data }: { data: DetailedTicket }) {
 				<div className="px-12 py-5">
 					<QRCode
 						className="w-full h-fit"
-						value="https://google.com/"
+						value={JSON.stringify({ ticketId: data.id })}
 					/>
 				</div>
 			</div>

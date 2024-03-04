@@ -43,7 +43,7 @@ export default function WalletPage({ tickets }: { tickets: SparseTicket[] }) {
 
 	return (
 		<div className="flex flex-grow overflow-y-clip">
-			<div className="flex flex-wrap gap-5 justify-evenly w-[30vw] overflow-y-auto py-5">
+			<div className="flex flex-wrap gap-5 justify-evenly w-[30vw] overflow-y-auto py-5 border-gray-300 border-r">
 				{tickets.map((ticket) => (
 					<CollapsedTicket
 						onClick={() => {
@@ -54,7 +54,7 @@ export default function WalletPage({ tickets }: { tickets: SparseTicket[] }) {
 					/>
 				))}
 			</div>
-			<div className="flex-grow flex justify-center items-center">
+			<div className="flex-grow flex justify-center py-5 overflow-y-auto">
 				{loading ? (
 					<div
 						className="loader"

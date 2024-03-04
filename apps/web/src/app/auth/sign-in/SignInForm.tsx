@@ -27,6 +27,11 @@ export default function SignInForm() {
 				password: passwordRef.current?.value,
 				redirect: false,
 			}).then((results) => {
+				console.log({
+					email: emailRef.current?.value,
+					password: passwordRef.current?.value,
+					redirect: false,
+				});
 				if (results?.ok) {
 					router.push("/");
 				} else {

@@ -6,16 +6,18 @@ export default function LoadingButton({
 	className,
 	loaderColor = "#FFFFFF",
 	onClick,
+	disabled = false
 }: {
 	children: ReactNode;
 	loading: boolean;
 	className?: string;
 	loaderColor?: string;
 	onClick?: () => any;
+	disabled?: boolean
 }) {
 	return (
 		<button
-			disabled={loading}
+			disabled={disabled || loading}
 			onClick={onClick}
 			type="submit"
 			className={className}

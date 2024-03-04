@@ -1,6 +1,7 @@
 import { prisma } from "../client";
 import type { EventLocation, Prisma } from "@prisma/client";
 import bcrypt from "bcrypt";
+import { faker } from '@faker-js/faker';
 
 async function main() {
 	// Available ticket types
@@ -89,7 +90,7 @@ async function insertFakeData() {
 		},
 	});
 
-	hashedPassword = await bcrypt.hash("Bob123", 10);
+	hashedPassword = await bcrypt.hash("Bob123456", 10);
 
 	await prisma.account.create({
 		data: {
@@ -100,26 +101,27 @@ async function insertFakeData() {
 	});
 
 	let fakeEvents: Prisma.EventCreateManyInput[] = [];
+	let locations: Prisma.EventLocationCreateManyInput[] = [];
 
 	for (let i = 1; i <= 10; i++) {
 		fakeEvents.push({
 			id: i,
 			name: "Event " + i,
 		});
+
+		for (let j = 0; j <= 3; j++) {
+			locations.push({
+				eventId: i,
+				name: faker.location.streetAddress(false),
+			});
+		}
 	}
 
 	await prisma.event.createMany({
 		data: fakeEvents,
 	});
 
-	let locations: Prisma.EventLocationCreateManyInput[] = [];
 
-	for (let i = 1; i <= 3; i++) {
-		locations.push({
-			eventId: 1,
-			name: "Location " + i,
-		});
-	}
 
 	await prisma.eventLocation.createMany({
 		data: locations,
