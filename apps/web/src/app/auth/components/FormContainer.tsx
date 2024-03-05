@@ -32,7 +32,7 @@ export default function FormContainer({
 				<div className="text-sm">
 					{altMethod && (
 						<>
-							altMethod.text + " "
+							{altMethod.text + " "}
 							<Link
 								className="text-brand-red font-semibold"
 								href={altMethod.url}
