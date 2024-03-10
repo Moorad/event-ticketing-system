@@ -24,6 +24,7 @@ services:
             - 6379:6379
     minio:
         image: bitnami/minio:latest
+        user: root
         ports:
             - 9000:9000
             - 9001:9001

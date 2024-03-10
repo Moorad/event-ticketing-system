@@ -1,12 +1,9 @@
 "use client";
+import { EventType } from "@/app/page";
 import { Event } from "database";
 import { UIEvent, UIEventHandler, useEffect, useRef, useState } from "react";
 
-export default function FeaturedEvents({
-	events,
-}: {
-	events: (Event & { thumbnail: string; logo: string })[];
-}) {
+export default function FeaturedEvents({ events }: { events: EventType[] }) {
 	const [currentEvent, setCurrentEvent] = useState(1);
 	const scrollableRef = useRef<HTMLDivElement | null>(null);
 
@@ -36,7 +33,9 @@ export default function FeaturedEvents({
 	}, [currentEvent]);
 
 	function computeScrollLeft(index: number) {
-		return (window.innerWidth / 2) * index - window.innerWidth / 4;
+		return (
+			(window.innerWidth / 2) * index - window.innerWidth / 4 + 16 * index
+		);
 	}
 
 	function silentlySwitch(e: UIEvent<HTMLDivElement>) {
@@ -56,12 +55,11 @@ export default function FeaturedEvents({
 				key={key}
 				className=" w-1/2 flex-shrink-0 aspect-[10/4] featured-event relative"
 			>
-				{/* {JSON.stringify(event)} */}
 				<img src={event.thumbnail} className="rounded-md" />
 				<div className="w-full h-full absolute z-10 top-0 right-0 bg-gradient-to-t from-brand-black to-transparent rounded-md"></div>
 				<img
 					src={event.logo}
-					className="absolute bottom-5 left-5 w-24 z-20"
+					className="absolute bottom-5 left-5 w-1/4 z-20"
 					alt=""
 				/>
 			</div>
@@ -70,7 +68,7 @@ export default function FeaturedEvents({
 
 	return (
 		<div
-			className="flex gap-8 w-full overflow-hidden my-5"
+			className="flex gap-[32px] w-full overflow-hidden my-5"
 			ref={scrollableRef}
 			onScroll={silentlySwitch}
 		>
