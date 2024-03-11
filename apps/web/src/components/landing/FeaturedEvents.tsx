@@ -1,7 +1,8 @@
 "use client";
 import { EventType } from "@/app/page";
 import { Event } from "database";
-import { UIEvent, UIEventHandler, useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { UIEvent, useEffect, useRef, useState } from "react";
 
 export default function FeaturedEvents({ events }: { events: EventType[] }) {
 	const [currentEvent, setCurrentEvent] = useState(1);
@@ -33,14 +34,16 @@ export default function FeaturedEvents({ events }: { events: EventType[] }) {
 	}, [currentEvent]);
 
 	function computeScrollLeft(index: number) {
-		return (
-			(window.innerWidth / 2) * index - window.innerWidth / 4 + 16 * index
-		);
+		const containerSize =
+			document.getElementsByClassName("featured-event")[0].clientWidth;
+		console.log(containerSize);
+		console.log(containerSize * index - containerSize / 2 + 32 * index);
+		return containerSize * index - containerSize / 2 + 32 * index + 16;
 	}
 
 	function silentlySwitch(e: UIEvent<HTMLDivElement>) {
-		if (e && currentEvent == events.length + 1) {
-			if (e.currentTarget.scrollLeft == computeScrollLeft(currentEvent)) {
+		if (e && currentEvent >= events.length + 1) {
+			if (currentEvent > events.length + 1) {
 				setCurrentEvent(1);
 			}
 		}
@@ -53,15 +56,17 @@ export default function FeaturedEvents({ events }: { events: EventType[] }) {
 		return (
 			<div
 				key={key}
-				className=" w-1/2 flex-shrink-0 aspect-[10/4] featured-event relative"
+				className=" w-1/2 min-w-72 flex-shrink-0 aspect-[10/4] featured-event relative"
 			>
-				<img src={event.thumbnail} className="rounded-md" />
-				<div className="w-full h-full absolute z-10 top-0 right-0 bg-gradient-to-t from-brand-black to-transparent rounded-md"></div>
-				<img
-					src={event.logo}
-					className="absolute bottom-5 left-5 w-1/4 z-20"
-					alt=""
-				/>
+				<Link href={`/event/${event.id}`}>
+					<img src={event.thumbnail} className="rounded-md" />
+					<div className="w-full h-full absolute z-10 top-0 right-0 bg-gradient-to-t from-brand-black to-transparent rounded-md"></div>
+					<img
+						src={event.logo}
+						className="absolute bottom-5 left-5 w-1/4 z-20"
+						alt=""
+					/>
+				</Link>
 			</div>
 		);
 	}

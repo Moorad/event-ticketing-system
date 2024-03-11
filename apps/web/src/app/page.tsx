@@ -1,15 +1,16 @@
-import EventBlock from "@/components/EventBlock";
+import EventCard from "@/components/EventCard";
 import CategorisedEvents from "@/components/landing/CategorisedEvents";
 import FeaturedEvents from "@/components/landing/FeaturedEvents";
+import SearchBar from "@/components/landing/SearchBar";
 import NavigationBar from "@/components/navigation-bar/NavigationBar";
 import { Event, prisma } from "database";
-import { Client } from "minio";
 
 export type EventType = Event & {
 	thumbnail: string;
 	logo: string;
 	startDate: Date;
 	endDate: Date | null;
+	isFeatured: boolean;
 };
 
 export default async function Home() {
@@ -23,21 +24,6 @@ export default async function Home() {
 		throw Error("The env variable 'MINIO_SECRET_KEY' is not set");
 	}
 
-	// const minioClient = new Client({
-	// 	endPoint: process.env.MINIO_URL,
-	// 	port: 9000,
-	// 	useSSL: false,
-	// 	accessKey: process.env.MINIO_ACCESS_KEY,
-	// 	secretKey: process.env.MINIO_SECRET_KEY,
-	// });
-
-	// console.log(
-	// 	await minioClient.presignedGetObject(
-	// 		"event-thumbnails",
-	// 		"19bf95c3-28d5-40cf-877e-40fdd9860826.png"
-	// 	)
-	// );
-
 	const events: EventType[] = [
 		{
 			id: 1,
@@ -48,6 +34,7 @@ export default async function Home() {
 			logo: "http://127.0.0.1:9000/event-logos/05cf0ac7-f216-40dd-bb30-a5db8707854e.png",
 			startDate: new Date(1710100900925),
 			endDate: null,
+			isFeatured: true,
 		},
 		{
 			id: 2,
@@ -58,6 +45,7 @@ export default async function Home() {
 			logo: "http://127.0.0.1:9000/event-logos/f6b5f97e-6854-461e-99fb-fa241d6add69.png",
 			startDate: new Date(1710100900925),
 			endDate: null,
+			isFeatured: true,
 		},
 		{
 			id: 3,
@@ -69,26 +57,33 @@ export default async function Home() {
 			logo: "http://127.0.0.1:9000/event-logos/75037db7-e934-4819-b403-d0077722fa6d.png",
 			startDate: new Date(1710100900925),
 			endDate: null,
+			isFeatured: true,
 		},
 	];
 
 	return (
 		<div>
 			<NavigationBar />
-			<FeaturedEvents events={events} />
-			<CategorisedEvents
-				title="Upcoming Events"
-				events={events
-					.map((a) => ({ sort: Math.random(), value: a }))
-					.sort((a, b) => a.sort - b.sort)
-					.map((a) => a.value)}
-			/>
-			<CategorisedEvents title="Exclusive on ETS" events={events} />
-			<div>Available events:</div>
-			<div className="flex flex-wrap gap-2">
-				{data.map((event) => (
-					<EventBlock data={event} key={event.id} />
-				))}
+			<div className="p-5">
+				<FeaturedEvents events={events.filter((e) => e.isFeatured)} />
+				<CategorisedEvents
+					title="Upcoming Events"
+					events={events
+						.map((a) => ({ sort: Math.random(), value: a }))
+						.sort((a, b) => a.sort - b.sort)
+						.map((a) => a.value)}
+				/>
+				<CategorisedEvents
+					title="Recommended For You"
+					events={events}
+				/>
+				<div className="font-bold text-xl mt-10">All Events</div>
+				<SearchBar />
+				<div className="flex flex-wrap gap-2 my-2">
+					{events.map((event) => (
+						<EventCard event={event} key={event.id} />
+					))}
+				</div>
 			</div>
 		</div>
 	);
