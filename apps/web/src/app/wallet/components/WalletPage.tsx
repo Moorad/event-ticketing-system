@@ -32,7 +32,6 @@ export default function WalletPage({ tickets }: { tickets: SparseTicket[] }) {
 				});
 
 				if (res.ok) {
-					console.log(res.body);
 					setTicketData(res.body.data);
 				}
 			};

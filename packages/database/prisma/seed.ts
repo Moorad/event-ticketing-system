@@ -1,7 +1,7 @@
 import { prisma } from "../client";
 import type { EventLocation, Prisma } from "@prisma/client";
 import bcrypt from "bcrypt";
-import { faker } from '@faker-js/faker';
+import { faker } from "@faker-js/faker";
 
 async function main() {
 	// Available ticket types
@@ -103,10 +103,34 @@ async function insertFakeData() {
 	let fakeEvents: Prisma.EventCreateManyInput[] = [];
 	let locations: Prisma.EventLocationCreateManyInput[] = [];
 
-	for (let i = 1; i <= 10; i++) {
+	let images = [
+		{
+			thumbnail:
+				"http://127.0.0.1:9000/event-thumbnails/76be0ba1-d332-47ce-8335-9908133b7268.png",
+			logo: "http://127.0.0.1:9000/event-logos/05cf0ac7-f216-40dd-bb30-a5db8707854e.png",
+		},
+		{
+			thumbnail:
+				"http://127.0.0.1:9000/event-thumbnails/19bf95c3-28d5-40cf-877e-40fdd9860826.png",
+			logo: "http://127.0.0.1:9000/event-logos/f6b5f97e-6854-461e-99fb-fa241d6add69.png",
+		},
+		{
+			thumbnail:
+				"http://127.0.0.1:9000/event-thumbnails/c56655d0-ea25-4031-8b46-2f616d28487a.png",
+
+			logo: "http://127.0.0.1:9000/event-logos/75037db7-e934-4819-b403-d0077722fa6d.png",
+		},
+	];
+
+	for (let i = 0; i < 3; i++) {
 		fakeEvents.push({
 			id: i,
 			name: "Event " + i,
+			description: faker.lorem.paragraph(),
+			thumbnail: images[i].thumbnail,
+			logo: images[i].logo,
+			startDate: faker.date.future(),
+			isFeatured: true,
 		});
 
 		for (let j = 0; j <= 3; j++) {
@@ -120,8 +144,6 @@ async function insertFakeData() {
 	await prisma.event.createMany({
 		data: fakeEvents,
 	});
-
-
 
 	await prisma.eventLocation.createMany({
 		data: locations,

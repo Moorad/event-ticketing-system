@@ -1,9 +1,10 @@
+import { prisma } from "database";
+import { NextRequest } from "next/server";
+
 export const dynamic = "force-dynamic";
 
-import { prisma } from "database";
-
 export async function GET(
-	request: Request,
+	request: NextRequest,
 	{ params }: { params: { id: string } }
 ) {
 	const ticket = await prisma.ticket.findUnique({
@@ -31,25 +32,28 @@ export async function GET(
 }
 
 export async function DELETE(
-	request: Request,
+	request: NextRequest,
 	{ params }: { params: { id: string } }
 ) {
 	const ticket = await prisma.ticket.findUnique({
 		where: {
-			id: Number(params.id)
-		}
+			id: Number(params.id),
+		},
 	});
 
 	if (ticket == null) {
-		return Response.json({
-			status: "error",
-			message: `No ticket exists with ID ${params.id}`
-		}, {
-			status: 400
-		})
+		return Response.json(
+			{
+				status: "error",
+				message: `No ticket exists with ID ${params.id}`,
+			},
+			{
+				status: 400,
+			}
+		);
 	}
 
 	return Response.json({
-		status: "success"
-	})
+		status: "success",
+	});
 }

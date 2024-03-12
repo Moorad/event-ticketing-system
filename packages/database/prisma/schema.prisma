@@ -31,6 +31,11 @@ model Event {
     id            Int             @id @default(autoincrement())
     name          String
     description   String          @default("No description.")
+    isFeatured    Boolean         @default(false)
+    startDate     DateTime
+    endDate       DateTime?
+    thumbnail     String
+    logo          String?
     tickets       Ticket[]
     EventLocation EventLocation[]
 }

@@ -2,10 +2,13 @@ import { naturalLanguageCombine } from "@/utils/format";
 import { prisma } from "database";
 import bcrypt from "bcrypt";
 import { z } from "zod";
+import { NextRequest } from "next/server";
 
 const saltRounds = 10;
 
-export async function POST(request: Request) {
+export const dynamic = "force-dynamic";
+
+export async function POST(request: NextRequest) {
 	const body = await request.json();
 
 	const validBody = z

@@ -1,7 +1,9 @@
-import { arrayToBulletPoints, naturalLanguageCombine } from "@/utils/format";
+import { NextRequest } from "next/server";
 import { z } from "zod";
 
-export async function POST(request: Request) {
+export const dynamic = "force-dynamic";
+
+export async function POST(request: NextRequest) {
 	const body = await request.json();
 
 	const validBody = z

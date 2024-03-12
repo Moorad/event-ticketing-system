@@ -1,4 +1,5 @@
 import { Prisma, prisma } from "database";
+import { NextRequest } from "next/server";
 
 export const dynamic = "force-dynamic";
 
@@ -8,7 +9,7 @@ type ReqBodyType = {
 	tickets: Record<string, string>[];
 };
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
 	const body = (await request.json()) as ReqBodyType;
 
 	let payload: Prisma.TicketCreateManyInput[] = [];

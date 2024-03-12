@@ -1,10 +1,9 @@
 "use client";
-import { EventType } from "@/app/page";
 import { Event } from "database";
 import Link from "next/link";
 import { UIEvent, useEffect, useRef, useState } from "react";
 
-export default function FeaturedEvents({ events }: { events: EventType[] }) {
+export default function FeaturedEvents({ events }: { events: Event[] }) {
 	const [currentEvent, setCurrentEvent] = useState(1);
 	const scrollableRef = useRef<HTMLDivElement | null>(null);
 
@@ -36,8 +35,6 @@ export default function FeaturedEvents({ events }: { events: EventType[] }) {
 	function computeScrollLeft(index: number) {
 		const containerSize =
 			document.getElementsByClassName("featured-event")[0].clientWidth;
-		console.log(containerSize);
-		console.log(containerSize * index - containerSize / 2 + 32 * index);
 		return containerSize * index - containerSize / 2 + 32 * index + 16;
 	}
 
@@ -49,10 +46,7 @@ export default function FeaturedEvents({ events }: { events: EventType[] }) {
 		}
 	}
 
-	function renderFeaturedEvent(
-		key: number,
-		event: Event & { thumbnail: string; logo: string }
-	) {
+	function renderFeaturedEvent(key: number, event: Event) {
 		return (
 			<div
 				key={key}
@@ -61,11 +55,17 @@ export default function FeaturedEvents({ events }: { events: EventType[] }) {
 				<Link href={`/event/${event.id}`}>
 					<img src={event.thumbnail} className="rounded-md" />
 					<div className="w-full h-full absolute z-10 top-0 right-0 bg-gradient-to-t from-brand-black to-transparent rounded-md"></div>
-					<img
-						src={event.logo}
-						className="absolute bottom-5 left-5 w-1/4 z-20"
-						alt=""
-					/>
+					{event.logo ? (
+						<img
+							src={event.logo}
+							className="absolute bottom-5 left-5 w-1/4 z-20"
+							alt=""
+						/>
+					) : (
+						<div className="absolute bottom-5 left-5 z-20 text-white text-3xl font-bold">
+							{event.name}
+						</div>
+					)}
 				</Link>
 			</div>
 		);
