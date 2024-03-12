@@ -122,11 +122,12 @@ async function insertFakeData() {
 		},
 	];
 
+	let eventNames = ["Formula One Race", "Diryah", "Wonder Garden"];
+
 	for (let i = 0; i < 3; i++) {
 		fakeEvents.push({
-			id: i,
-			name: "Event " + i,
-			description: faker.lorem.paragraph(),
+			name: eventNames[i],
+			description: faker.lorem.paragraphs(4),
 			thumbnail: images[i].thumbnail,
 			logo: images[i].logo,
 			startDate: faker.date.future(),
@@ -135,7 +136,7 @@ async function insertFakeData() {
 
 		for (let j = 0; j <= 3; j++) {
 			locations.push({
-				eventId: i,
+				eventId: i + 1,
 				name: faker.location.streetAddress(false),
 			});
 		}

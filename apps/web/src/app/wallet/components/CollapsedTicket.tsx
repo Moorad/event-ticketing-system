@@ -16,7 +16,7 @@ export default function CollapsedTicket({
 			<div className="flex gap-3 py-5 px-5">
 				<div className="w-6 h-6 bg-gray-300"></div>
 				<div>{data.event.name}</div>
-				<div className="bg-gray-700 text-white py-1 px-4 rounded-full ml-auto text-sm ">
+				<div className="bg-gray-700 text-white py-1 px-4 rounded-full ml-auto text-sm h-fit">
 					{data.ticketType.name}
 				</div>
 			</div>

@@ -14,7 +14,7 @@ export default function FullTicket({ data }: { data: DetailedTicket }) {
 				<div className="flex gap-3">
 					<div className="w-6 h-6 bg-gray-300"></div>
 					<div>{data.event.name}</div>
-					<div className="bg-gray-700 text-white text-sm px-5 py-1 rounded-full ml-auto">
+					<div className="bg-gray-700 text-white text-sm px-5 py-1 rounded-full ml-auto h-fit">
 						{data.ticketType.name}
 					</div>
 				</div>

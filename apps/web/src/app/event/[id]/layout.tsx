@@ -5,7 +5,9 @@ export default function Layout({ children }: { children: ReactNode }) {
 	return (
 		<div className="flex flex-col h-screen">
 			<NavigationBar />
-			{children}
+			<div className="flex justify-center items-center flex-grow overflow-hidden">
+				{children}
+			</div>
 		</div>
 	);
 }
