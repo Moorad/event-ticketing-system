@@ -18,8 +18,19 @@ export async function GET(request: NextRequest) {
 	const events = await prisma.event.findMany({
 		where: {
 			name: {
-				startsWith: `%${query}`,
-				endsWith: `${query}%`,
+				contains: query,
+				mode: "insensitive",
+			},
+		},
+		include: {
+			TicketType: {
+				select: {
+					cost: true,
+				},
+				orderBy: {
+					cost: "asc",
+				},
+				take: 1,
 			},
 		},
 	});

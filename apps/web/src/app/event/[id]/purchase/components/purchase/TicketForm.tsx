@@ -27,7 +27,7 @@ export default function TicketForm({
 					</div>
 					{ticket.name} ticket
 				</div>
-				<div className="ml-auto">${ticket.cost}</div>
+				<div className="ml-auto">{ticket.cost} SAR</div>
 			</div>
 			<div className="text-gray-500">{event.name}</div>
 			<div className="mt-4 text-gray-500">{ticket.description}</div>

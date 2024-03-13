@@ -1,12 +1,20 @@
 "use client";
 
-import { Event } from "database";
+import { Event, TicketType } from "database";
 import EventCard from "../EventCard";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
 import useFetch from "@/utils/hooks/useFetch";
 
-export default function SearchEvents({ initValue }: { initValue: Event[] }) {
+export type EventAndCheapestTicket = Event & {
+	TicketType: Pick<TicketType, "cost">[];
+};
+
+export default function SearchEvents({
+	initValue,
+}: {
+	initValue: EventAndCheapestTicket[];
+}) {
 	const [events, setEvents] = useState(initValue);
 	const { loading, error, request } = useFetch();
 

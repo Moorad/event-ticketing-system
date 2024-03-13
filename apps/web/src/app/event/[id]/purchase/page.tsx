@@ -46,7 +46,11 @@ export default async function Event({ params }: { params: { id: string } }) {
 		return <div>Event not found!</div>;
 	}
 
-	const ticketTypes = await prisma.ticketType.findMany();
+	const ticketTypes = await prisma.ticketType.findMany({
+		where: {
+			eventId: Number(params.id),
+		},
+	});
 
 	return (
 		<CheckoutRouter

@@ -1,33 +1,9 @@
 import { prisma } from "../client";
-import type { EventLocation, Prisma } from "@prisma/client";
+import type { EventLocation, Prisma, TicketType } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { faker } from "@faker-js/faker";
 
 async function main() {
-	// Available ticket types
-	await prisma.ticketType.createMany({
-		data: [
-			{
-				name: "Children",
-				description:
-					"Join the fun-filled event with our Children Ticket, specially designed to cater to our younger attendees. With this ticket, kids can enjoy access to all event areas and engage in exciting activities tailored just for them, ensuring a memorable experience for the little ones.",
-				cost: 5.99,
-			},
-			{
-				name: "Regular",
-				description:
-					"Secure your spot at the heart of the event with our Regular Ticket, offering unrestricted access to all event attractions and performances. Immerse yourself in the festivities, indulge in delicious food options, and participate in various interactive activities for a day of entertainment and enjoyment.",
-				cost: 9.99,
-			},
-			{
-				name: "VIP",
-				description:
-					"Elevate your event experience with our VIP Ticket, granting exclusive perks and privileges. Enjoy expedited entry, access to VIP lounges with complimentary refreshments, and premium seating for main stage performances. Dive into luxury and convenience while relishing the event in style with our VIP Ticket.",
-				cost: 19.99,
-			},
-		],
-	});
-
 	// Available permissions
 	await prisma.permission.createMany({
 		data: [
@@ -102,7 +78,9 @@ async function insertFakeData() {
 
 	let fakeEvents: Prisma.EventCreateManyInput[] = [];
 	let locations: Prisma.EventLocationCreateManyInput[] = [];
+	let ticketTypes: Prisma.TicketTypeCreateManyInput[] = [];
 
+	// Available ticket types
 	let images = [
 		{
 			thumbnail:
@@ -134,12 +112,32 @@ async function insertFakeData() {
 			isFeatured: true,
 		});
 
-		for (let j = 0; j <= 3; j++) {
+		for (let j = 0; j < 3; j++) {
 			locations.push({
 				eventId: i + 1,
 				name: faker.location.streetAddress(false),
 			});
 		}
+
+		ticketTypes.push({
+			eventId: i + 1,
+			name: "Regular",
+			description: faker.lorem.paragraphs(4),
+			cost: faker.number.int({ min: 20, max: 200 }),
+		});
+		ticketTypes.push({
+			eventId: i + 1,
+			name: "Child",
+			description: faker.lorem.paragraphs(4),
+			cost: faker.number.int({ min: 20, max: 100 }),
+		});
+
+		ticketTypes.push({
+			eventId: i + 1,
+			name: eventNames[i] + " Premium",
+			description: faker.lorem.paragraphs(4),
+			cost: faker.number.int({ min: 200, max: 500 }),
+		});
 	}
 
 	await prisma.event.createMany({
@@ -149,6 +147,8 @@ async function insertFakeData() {
 	await prisma.eventLocation.createMany({
 		data: locations,
 	});
+
+	await prisma.ticketType.createMany({ data: ticketTypes });
 }
 
 main()

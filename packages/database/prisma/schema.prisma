@@ -38,6 +38,7 @@ model Event {
     logo          String?
     tickets       Ticket[]
     EventLocation EventLocation[]
+    TicketType    TicketType[]
 }
 
 model EventLocation {
@@ -66,10 +67,12 @@ model Ticket {
 
 model TicketType {
     id          Int      @id @default(autoincrement())
+    Event       Event    @relation(fields: [eventId], references: [id])
+    eventId     Int
     name        String
     description String
     cost        Float
-    ticket      Ticket[]
+    Ticket      Ticket[]
 }
 
 // Role-based permissions

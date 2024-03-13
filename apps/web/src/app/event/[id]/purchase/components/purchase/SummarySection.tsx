@@ -30,7 +30,9 @@ export default function SummarySection({
 					{ctx.tickets.map((ticket, i) => (
 						<div className="flex font-semibold" key={i}>
 							<div>{ticket.name} ticket</div>
-							<div className="ml-auto">${ticket.cost}</div>
+							<div className="ml-auto w-1/3 text-right">
+								{ticket.cost} SAR
+							</div>
 						</div>
 					))}
 				</div>
@@ -39,19 +41,20 @@ export default function SummarySection({
 					<div className="text-sm flex">
 						<div>Subtotal</div>
 						<div className="ml-auto">
-							${numberFormat(computeSubtotal(), 2)}
+							{numberFormat(computeSubtotal(), 2)} SAR
 						</div>
 					</div>
 					<div className="text-sm flex">
 						<div>VAT</div>
 						<div className="ml-auto">
-							${numberFormat(computeVAT(), 2)}
+							{numberFormat(computeVAT(), 2)} SAR
 						</div>
 					</div>
 					<div className="font-semibold flex">
 						<div>Total</div>
 						<div className="ml-auto">
-							${numberFormat(computeSubtotal() + computeVAT(), 2)}
+							{numberFormat(computeSubtotal() + computeVAT(), 2)}{" "}
+							SAR
 						</div>
 					</div>
 					<LoadingButton

@@ -31,8 +31,8 @@ export default function TicketCounter(props: {
 					+
 				</button>
 				<div>
-					× ${props.cost} = $
-					{numberFormat(props.cost * props.value, 2)}
+					× {props.cost} SAR =
+					{numberFormat(props.cost * props.value, 2)} SAR
 				</div>
 			</div>
 		</div>

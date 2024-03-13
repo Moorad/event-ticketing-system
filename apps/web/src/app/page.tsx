@@ -6,7 +6,19 @@ import { shuffle } from "@/utils/transform";
 import { prisma } from "database";
 
 export default async function Home() {
-	const events = await prisma.event.findMany();
+	const events = await prisma.event.findMany({
+		include: {
+			TicketType: {
+				select: {
+					cost: true,
+				},
+				orderBy: {
+					cost: "asc",
+				},
+				take: 1,
+			},
+		},
+	});
 
 	return (
 		<div>

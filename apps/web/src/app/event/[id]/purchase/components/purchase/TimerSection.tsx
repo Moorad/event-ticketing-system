@@ -58,6 +58,10 @@ export default function TimerSection({ endTime }: { endTime: number }) {
 		}, 1000);
 
 		intervalRef.current = intervalId;
+
+		return () => {
+			clearInterval(intervalId);
+		};
 	}, [endTime]);
 
 	return (

@@ -60,7 +60,7 @@ export default function PaymentPage({
 					<div className="text-center mb-12">
 						Total amount:{" "}
 						<span className="font-semibold">
-							${numberFormat(computeTotal(), 2)}
+							{numberFormat(computeTotal(), 2)} SAR
 						</span>
 					</div>
 					<div className="flex flex-col gap-2">
