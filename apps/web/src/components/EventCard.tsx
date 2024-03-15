@@ -9,7 +9,10 @@ export default function EventCard({
 }) {
 	return (
 		<div className="flex flex-col justify-center w-72 bg-white light-drop-shadow rounded-md">
-			<img src={event.thumbnail} className="rounded-t-md" />
+			<img
+				src={event.thumbnail}
+				className="rounded-t-md aspect-[10/4] object-cover"
+			/>
 			<div className="py-2 px-4">
 				<div className=" font-semibold">{event.name}</div>
 				<div className="text-sm">

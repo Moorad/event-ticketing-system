@@ -73,7 +73,7 @@ export default function PreviewStep() {
 			<div className="flex flex-col gap-5">
 				{ctx.tickets.map((t, i) => {
 					return (
-						<div>
+						<div key={i}>
 							<div className="mt-3">Ticket {i + 1}</div>
 							<div className="pl-7 flex flex-col gap-3">
 								<div>

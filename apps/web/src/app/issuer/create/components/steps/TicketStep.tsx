@@ -20,7 +20,7 @@ export default function TicketStep() {
 
 	useEffect(() => {
 		setCurrentTicket(ctx.tickets.length - 1);
-	}, [ctx.tickets]);
+	}, [ctx.tickets.length]);
 
 	function handleTicketChange(id: number) {
 		// Dont change if user clicked on the already selected ticket
@@ -98,7 +98,7 @@ export default function TicketStep() {
 					type="number"
 					className="w-full border px-3 py-2 text-sm"
 					placeholder="Price"
-					value={ctx.tickets[currentTicket].cost}
+					value={ctx.tickets[currentTicket].cost.toString()}
 					onChange={(e) => {
 						ctx.setTickets((prev) =>
 							updateObjectAt(prev, currentTicket, {

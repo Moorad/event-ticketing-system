@@ -1,17 +1,12 @@
 "use client";
 
-import {
-	Dispatch,
-	SetStateAction,
-	createContext,
-	useEffect,
-	useState,
-} from "react";
+import { Dispatch, SetStateAction, createContext, useState } from "react";
 import StepsView from "./components/StepsView";
 import { Event, TicketType } from "database";
 import StepRenderer, { steps } from "./components/StepRenderer";
 import BottomStepNavigation from "./components/BottomStepNavigation";
 import useFetch from "@/utils/hooks/useFetch";
+import FormError from "@/app/auth/components/FormError";
 
 type BasicEvent = Pick<
 	Event,
@@ -88,11 +83,6 @@ export default function issuerCreate() {
 		}
 	}
 
-	useEffect(() => {
-		console.log(event);
-		console.log(tickets);
-	}, [event, tickets]);
-
 	return (
 		<EventFormContext.Provider
 			value={{
@@ -105,6 +95,7 @@ export default function issuerCreate() {
 			<div className="flex flex-grow overflow-hidden p-5 gap-5 justify-center">
 				<StepsView steps={steps} currentStep={currentStep} />
 				<div className="bg-white w-[700px] light-drop-shadow rounded-md py-7 px-7 h-full overflow-x-auto">
+					<FormError className="mb-3">{error}</FormError>
 					<StepRenderer stepId={currentStep} />
 					<BottomStepNavigation
 						currentStep={currentStep}

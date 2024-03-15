@@ -15,8 +15,12 @@ export default function CategorisedEvents({
 			<div className="flex gap-5 overflow-x-auto z-10 py-2">
 				{events.map((e, i) => (
 					<Link href={`/event/${e.id}`} key={i}>
-						<div className="w-96 aspect-[10/4] rounded bg-red-500 relative flex-shrink-0">
-							<img src={e.thumbnail} className="rounded" alt="" />
+						<div className="w-96 rounded relative flex-shrink-0">
+							<img
+								src={e.thumbnail}
+								className="rounded aspect-[10/4] object-cover"
+								alt=""
+							/>
 							<div className="absolute top-0 left-0 bg-gradient-to-t rounded from-brand-black to-transparent z-10 w-full h-full"></div>
 							<div className="absolute bottom-2 left-3 rounded text-white z-20">
 								<div className="text-lg font-semibold">

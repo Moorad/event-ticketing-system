@@ -50,15 +50,18 @@ export default function FeaturedEvents({ events }: { events: Event[] }) {
 		return (
 			<div
 				key={key}
-				className=" w-1/2 min-w-72 flex-shrink-0 aspect-[10/4] featured-event relative"
+				className=" w-1/2 min-w-72 flex-shrink-0 featured-event relative"
 			>
 				<Link href={`/event/${event.id}`}>
-					<img src={event.thumbnail} className="rounded-md" />
+					<img
+						src={event.thumbnail}
+						className="rounded-md aspect-[10/4] w-full object-cover"
+					/>
 					<div className="w-full h-full absolute z-10 top-0 right-0 bg-gradient-to-t from-brand-black to-transparent rounded-md"></div>
 					{event.logo ? (
 						<img
 							src={event.logo}
-							className="absolute bottom-5 left-5 w-1/4 z-20"
+							className="absolute bottom-5 left-5 w-1/4 z-20 aspect-square object-contain object-bottom"
 							alt=""
 						/>
 					) : (
