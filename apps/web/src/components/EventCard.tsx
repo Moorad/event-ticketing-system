@@ -16,9 +16,11 @@ export default function EventCard({
 					{plainDate(new Date(event.startDate))}
 				</div>
 				<div className="flex align-middle items-center">
-					<div className="text-sm ">
-						From {event.TicketType[0].cost} SAR
-					</div>
+					{event.TicketType.length > 0 && (
+						<div className="text-sm ">
+							From {event.TicketType[0].cost} SAR
+						</div>
+					)}
 					<Link className="ml-auto" href={"/event/" + event.id}>
 						<button className="text-sm bg-brand-red text-white px-4 py-1 rounded hover:cursor-pointer">
 							Book

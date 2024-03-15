@@ -2,11 +2,13 @@ import NavigationBar from "@/components/navigation-bar/NavigationBar";
 import RequirePermission from "@/components/wrappers/RequirePermission";
 import { ReactNode } from "react";
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default function issuerLayout({ children }: { children: ReactNode }) {
 	return (
 		<RequirePermission permissionId={2}>
-			<NavigationBar />
-			{children}
+			<div className="flex flex-col overflow-hidden h-screen">
+				<NavigationBar />
+				{children}
+			</div>
 		</RequirePermission>
 	);
 }
