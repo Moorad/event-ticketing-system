@@ -10,6 +10,7 @@ export async function POST(req: NextRequest) {
 	// Validation
 	const validation = z
 		.object({
+			userId: z.number().min(1, "Invalid user ID"),
 			event: z.object({
 				name: z
 					.string()
@@ -77,8 +78,9 @@ export async function POST(req: NextRequest) {
 	}
 
 	// Insert
-	await prisma.event.create({
+	const event = await prisma.event.create({
 		data: {
+			userId: validation.data.userId,
 			name: validation.data.event.name,
 			description: validation.data.event.description,
 			startDate: validation.data.event.startDate,
@@ -101,5 +103,6 @@ export async function POST(req: NextRequest) {
 
 	return Response.json({
 		status: "success",
+		eventId: event.id,
 	});
 }

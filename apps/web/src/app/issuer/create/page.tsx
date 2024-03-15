@@ -7,6 +7,8 @@ import StepRenderer, { steps } from "./components/StepRenderer";
 import BottomStepNavigation from "./components/BottomStepNavigation";
 import useFetch from "@/utils/hooks/useFetch";
 import FormError from "@/app/auth/components/FormError";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 type BasicEvent = Pick<
 	Event,
@@ -53,6 +55,8 @@ export default function issuerCreate() {
 		},
 	]);
 	const { loading, error, request } = useFetch();
+	const session = useSession();
+	const router = useRouter();
 
 	function handleNextStep() {
 		if (currentStep < steps.length - 1) {
@@ -73,13 +77,14 @@ export default function issuerCreate() {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
+				userId: session.data?.user.id,
 				event: event,
 				tickets: tickets,
 			}),
 		});
 
 		if (res.ok) {
-			console.log(res.body);
+			router.push(`/event/${res.body.eventId}`);
 		}
 	}
 

@@ -15,6 +15,7 @@ model User {
     fullName String
     account  Account?
     tickets  Ticket[]
+    events   Event[]
     role     Role     @relation(fields: [roleId], references: [id])
     roleId   Int
 }
@@ -37,6 +38,8 @@ model Event {
     thumbnail     String
     logo          String?
     tickets       Ticket[]
+    User          User            @relation(fields: [userId], references: [id])
+    userId        Int
     EventLocation EventLocation[]
     TicketType    TicketType[]
 }

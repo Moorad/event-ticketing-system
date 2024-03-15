@@ -104,6 +104,7 @@ async function insertFakeData() {
 
 	for (let i = 0; i < 3; i++) {
 		fakeEvents.push({
+			userId: 2,
 			name: eventNames[i],
 			description: faker.lorem.paragraphs(4),
 			thumbnail: images[i].thumbnail,
