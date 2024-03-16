@@ -21,22 +21,18 @@ export default async function Home() {
 	});
 
 	return (
-		<div>
-			<NavigationBar />
-
-			<div className="p-5">
-				<FeaturedEvents events={events.filter((e) => e.isFeatured)} />
-				<CategorisedEvents
-					title="Upcoming Events"
-					events={shuffle(events)}
-				/>
-				<CategorisedEvents
-					title="Recommended For You"
-					events={shuffle(events)}
-				/>
-				<div className="font-bold text-xl mt-10">All Events</div>
-				<SearchEvents initValue={events} />
-			</div>
+		<div className="p-5">
+			<FeaturedEvents events={events.filter((e) => e.isFeatured)} />
+			<CategorisedEvents
+				title="Upcoming Events"
+				events={shuffle(events)}
+			/>
+			<CategorisedEvents
+				title="Recommended For You"
+				events={shuffle(events)}
+			/>
+			<div className="font-bold text-xl mt-10">All Events</div>
+			<SearchEvents initValue={events} />
 		</div>
 	);
 }

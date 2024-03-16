@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import LoadingButton from "../LoadingButton";
 import { signOut } from "next-auth/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 export default function SignOutButton({
 	className,
@@ -21,10 +23,10 @@ export default function SignOutButton({
 		<LoadingButton
 			loading={clicked}
 			className={className}
-			loaderColor="#404040"
+			loaderColor="#fffff"
 			onClick={() => setClicked(true)}
 		>
-			Sign out
+			<FontAwesomeIcon icon={faRightFromBracket} />
 		</LoadingButton>
 	);
 }

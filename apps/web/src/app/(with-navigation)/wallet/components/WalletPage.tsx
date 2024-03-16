@@ -1,6 +1,6 @@
 "use client";
 
-import CollapsedTicket from "@/app/wallet/components/CollapsedTicket";
+import CollapsedTicket from "@/app/(with-navigation)/wallet/components/CollapsedTicket";
 
 import { Event, EventLocation, Ticket, TicketType } from "database";
 import FullTicket from "./FullTicket";

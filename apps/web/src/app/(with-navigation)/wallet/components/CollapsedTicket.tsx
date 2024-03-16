@@ -1,4 +1,4 @@
-import Perforation from "../../../components/ticket/Perforation";
+import Perforation from "../../../../components/ticket/Perforation";
 import { SparseTicket } from "../page";
 
 export default function CollapsedTicket({

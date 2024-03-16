@@ -5,10 +5,7 @@ import { ReactNode } from "react";
 export default function issuerLayout({ children }: { children: ReactNode }) {
 	return (
 		<RequirePermission permissionId={2}>
-			<div className="flex flex-col overflow-hidden h-screen">
-				<NavigationBar />
-				{children}
-			</div>
+			<div className="flex flex-col overflow-hidden">{children}</div>
 		</RequirePermission>
 	);
 }
