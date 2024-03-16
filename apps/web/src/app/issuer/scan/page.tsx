@@ -46,36 +46,38 @@ export default function Scan() {
 	}
 
 	return (
-		<div className="flex max-sm:flex-col p-10 gap-5 max-sm:max-w-[400px] sm:h-[400px] mx-auto sm:justify-center">
-			<Scanner detectedQRCode={handleQRCode} />
-			<div className="text-center text-xl font-semibold text-gray-400 flex flex-col justify-center">
-				or
-			</div>
-			<div className="flex flex-col justify-center">
-				<FormError className="mb-5">{error}</FormError>
-				<FormError className="mb-5">{success}</FormError>
-				<div>
-					<label className="block text-gray-500 text-left">
-						Ticket number
-					</label>
-					<input
-						value={inputValue}
-						name="ticketNumber"
-						placeholder="#19183892"
-						className={
-							"border-gray-300 border rounded px-4 py-2 w-full text-left"
-						}
-						onChange={handleInputChange}
-					/>
+		<div className="sm:justify-center mx-auto p-10">
+			<FormError className="mb-5">{error}</FormError>
+			<FormError className="mb-5">{success}</FormError>
+			<div className="flex max-sm:flex-col gap-5 max-sm:max-w-[400px] sm:h-[400px] ">
+				<Scanner detectedQRCode={handleQRCode} />
+				<div className="text-center text-xl font-semibold text-gray-400 flex flex-col justify-center">
+					or
 				</div>
-				<LoadingButton
-					disabled={ticketId == null || Number.isNaN(ticketId)}
-					loading={loading}
-					className="bg-brand-red text-white w-full mt-16 py-2 rounded text-sm disabled:opacity-50"
-					onClick={handleSubmit}
-				>
-					Consume
-				</LoadingButton>
+				<div className="flex flex-col justify-center">
+					<div>
+						<label className="block text-gray-500 text-left">
+							Ticket number
+						</label>
+						<input
+							value={inputValue}
+							name="ticketNumber"
+							placeholder="#19183892"
+							className={
+								"border-gray-300 border rounded px-4 py-2 w-full text-left"
+							}
+							onChange={handleInputChange}
+						/>
+					</div>
+					<LoadingButton
+						disabled={ticketId == null || Number.isNaN(ticketId)}
+						loading={loading}
+						className="bg-brand-red text-white w-full mt-16 py-2 rounded text-sm disabled:opacity-50"
+						onClick={handleSubmit}
+					>
+						Consume
+					</LoadingButton>
+				</div>
 			</div>
 		</div>
 	);
