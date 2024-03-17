@@ -2,11 +2,9 @@ import { options } from "@/app/api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import SignOutButton from "./SignOutButton";
-import {
-	faRightToBracket,
-	faTicket,
-	faWallet,
-} from "@fortawesome/free-solid-svg-icons";
+import { faRightToBracket } from "@fortawesome/free-solid-svg-icons/faRightToBracket";
+import { faTicket } from "@fortawesome/free-solid-svg-icons/faTicket";
+import { faWallet } from "@fortawesome/free-solid-svg-icons/faWallet";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const pages = [

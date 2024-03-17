@@ -1,7 +1,3 @@
-import { faTicket } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { HTMLInputTypeAttribute } from "react";
-
 export default function Dropdown({
 	label,
 	name,

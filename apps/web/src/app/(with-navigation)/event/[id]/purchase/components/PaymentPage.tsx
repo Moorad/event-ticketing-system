@@ -14,7 +14,9 @@ export default function PaymentPage({
 	ticketTypes: TicketType[];
 }) {
 	const router = useRouter();
-	const { loading, error, request } = useFetch();
+	const { loading, request } = useFetch({
+		keepLoadingAfterSuccess: true,
+	});
 
 	function computeTotal() {
 		if (payload) {

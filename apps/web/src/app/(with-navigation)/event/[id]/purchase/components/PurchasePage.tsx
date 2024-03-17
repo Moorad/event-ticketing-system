@@ -13,24 +13,27 @@ import { Event, EventLocation, TicketType } from "database";
 import TicketTypeModal from "./purchase/TicketTypeModal";
 import { Session } from "next-auth";
 import useFetch from "@/utils/hooks/useFetch";
+import { ReqBodyType } from "./CheckoutRouter";
 
 export type ActiveInformation = {
 	status: "active";
 	expiresAt: number;
 };
 
-// Context for manging the user-added tickets
-export const TicketsContext = createContext<{
+type TicketContextType = {
 	tickets: TicketType[];
 	setTickets: Dispatch<SetStateAction<TicketType[]>>;
 	ticketFormRefs: RefObject<HTMLFormElement>[];
 	setTicketFormRefs: Dispatch<SetStateAction<RefObject<HTMLFormElement>[]>>;
 	event: (Event & { EventLocation: EventLocation[] }) | null;
-}>({
+};
+
+// Context for manging the user-added tickets
+export const TicketsContext = createContext<TicketContextType>({
 	tickets: [],
-	setTickets: (t) => {},
+	setTickets: () => {},
 	ticketFormRefs: [],
-	setTicketFormRefs: (r) => {},
+	setTicketFormRefs: () => {},
 	event: null,
 });
 
@@ -45,14 +48,16 @@ export default function PurchasePage({
 	event: Event & { EventLocation: EventLocation[] };
 	info: ActiveInformation;
 	session: Session;
-	finishPurchase: Function;
+	finishPurchase: (body: ReqBodyType) => void;
 }) {
 	const [tickets, setTickets] = useState<TicketType[]>([]);
 	const [ticketFormRefs, setTicketFormRef] = useState<
 		RefObject<HTMLFormElement>[]
 	>([]);
 	const [isModalVisible, setModalVisiblity] = useState(false);
-	const { loading, error, request } = useFetch();
+	const { loading, error, request } = useFetch({
+		keepLoadingAfterSuccess: true,
+	});
 
 	async function handleCheckout() {
 		// Ugly

@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Dropdown from "../../../../../../../components/primitives/Dropdown";
-import Input from "../../../../../../../components/primitives/Input";
-import { faTicket } from "@fortawesome/free-solid-svg-icons";
+import Dropdown from "@/components/primitives/Dropdown";
+import Input from "@/components/primitives/Input";
+import { faTicket } from "@fortawesome/free-solid-svg-icons/faTicket";
 import { Event, EventLocation, TicketType } from "database";
 import { RefObject } from "react";
 

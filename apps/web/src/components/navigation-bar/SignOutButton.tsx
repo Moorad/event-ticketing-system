@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import LoadingButton from "../LoadingButton";
 import { signOut } from "next-auth/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons/faRightFromBracket";
 
 export default function SignOutButton({
 	className,

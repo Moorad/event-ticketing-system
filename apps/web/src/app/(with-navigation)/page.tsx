@@ -1,7 +1,6 @@
 import CategorisedEvents from "@/components/landing/CategorisedEvents";
 import FeaturedEvents from "@/components/landing/FeaturedEvents";
 import SearchEvents from "@/components/landing/SearchEvents";
-import NavigationBar from "@/components/navigation-bar/NavigationBar";
 import { shuffle } from "@/utils/transform";
 import { prisma } from "database";
 
