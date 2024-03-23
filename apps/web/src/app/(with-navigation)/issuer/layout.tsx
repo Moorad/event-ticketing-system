@@ -1,10 +1,10 @@
-import NavigationBar from "@/components/navigation-bar/NavigationBar";
 import RequirePermission from "@/components/wrappers/RequirePermission";
+import { Permission } from "@/utils/permissions";
 import { ReactNode } from "react";
 
 export default function issuerLayout({ children }: { children: ReactNode }) {
 	return (
-		<RequirePermission permissionId={2}>
+		<RequirePermission permissionId={Permission.ISSUER}>
 			<div className="flex flex-col overflow-hidden">{children}</div>
 		</RequirePermission>
 	);
