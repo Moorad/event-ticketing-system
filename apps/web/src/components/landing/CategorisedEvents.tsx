@@ -1,5 +1,6 @@
 import { plainDate } from "@/utils/time";
 import { Event } from "database";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function CategorisedEvents({
@@ -16,7 +17,7 @@ export default function CategorisedEvents({
 				{events.map((e, i) => (
 					<Link href={`/event/${e.id}`} key={i}>
 						<div className="w-96 rounded relative flex-shrink-0">
-							<img
+							<Image
 								src={e.thumbnail}
 								className="rounded aspect-[10/4] object-cover"
 								alt=""

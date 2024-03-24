@@ -1,6 +1,7 @@
 import { plainDate } from "@/utils/time";
 import Link from "next/link";
 import { EventAndCheapestTicket } from "./landing/SearchEvents";
+import Image from "next/image";
 
 export default function EventCard({
 	event,
@@ -9,9 +10,10 @@ export default function EventCard({
 }) {
 	return (
 		<div className="flex flex-col justify-center w-72 bg-white light-drop-shadow rounded-md">
-			<img
+			<Image
 				src={event.thumbnail}
 				className="rounded-t-md aspect-[10/4] object-cover"
+				alt=""
 			/>
 			<div className="py-2 px-4">
 				<div className=" font-semibold">{event.name}</div>

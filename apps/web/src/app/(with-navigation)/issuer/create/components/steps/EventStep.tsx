@@ -1,22 +1,23 @@
 import { ChangeEvent, useContext, useState } from "react";
 import FieldRow from "../FieldRow";
-import { EventFormContext } from "../../page";
+import { EventFormContext } from "../../context/EventFormContext";
 import useFetch from "@/utils/hooks/useFetch";
 import { AllowedUploads as AllowedUploadType } from "@/app/api/image/upload/route";
+import Image from "next/image";
 
 export default function EventStep() {
 	const ctx = useContext(EventFormContext);
 	const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(
-		ctx.event.thumbnail || null
+		ctx.event.thumbnail || null,
 	);
 	const [logoPreview, setLogoPreview] = useState<string | null>(
-		ctx.event.logo || null
+		ctx.event.logo || null,
 	);
 	const { request } = useFetch();
 
 	async function handleImageUpload(
 		e: ChangeEvent<HTMLInputElement>,
-		uploadType: AllowedUploadType
+		uploadType: AllowedUploadType,
 	) {
 		if (e.target.files && e.target.files.length > 0) {
 			const formData = new FormData();
@@ -154,7 +155,7 @@ export default function EventStep() {
 
 				{thumbnailPreview && (
 					<div className="mt-4">
-						<img
+						<Image
 							className="aspect-[10/4] object-cover rounded-md"
 							src={thumbnailPreview}
 							alt=""
@@ -180,9 +181,10 @@ export default function EventStep() {
 				{logoPreview && (
 					<div className="mt-4">
 						<div className="bg-gray-300 rounded-md w-1/2 p-2">
-							<img
+							<Image
 								src={logoPreview}
 								className="aspect-square object-contain"
+								alt=""
 							/>
 						</div>
 						<div className="text-gray-400 text-xs">Preview</div>

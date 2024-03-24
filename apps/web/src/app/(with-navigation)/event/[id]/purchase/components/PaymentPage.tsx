@@ -24,7 +24,7 @@ export default function PaymentPage({
 				payload?.tickets.reduce((acc, curr) => {
 					let cost = 0;
 					const tt = ticketTypes.find(
-						(tt) => tt.id == Number(curr.ticketType)
+						(tt) => tt.id == Number(curr.ticketType),
 					);
 					if (tt) {
 						cost = tt.cost;

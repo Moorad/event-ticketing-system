@@ -17,7 +17,7 @@ export type DetailedTicket = Ticket & {
 export default function WalletPage({ tickets }: { tickets: SparseTicket[] }) {
 	const [selected, setSelected] = useState<number | null>(null);
 	const [ticketData, setTicketData] = useState<DetailedTicket | null>(null);
-	const { loading, error, request } = useFetch();
+	const { loading, request } = useFetch();
 
 	useEffect(() => {
 		if (selected != null) {

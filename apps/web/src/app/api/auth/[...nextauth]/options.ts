@@ -45,7 +45,7 @@ export const options: NextAuthOptions = {
 
 				const passwordsMatch = await bcrypt.compare(
 					password,
-					account.password
+					account.password,
 				);
 
 				// Passwords do not match

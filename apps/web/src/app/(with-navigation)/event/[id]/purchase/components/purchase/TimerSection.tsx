@@ -14,9 +14,9 @@ export default function TimerSection({ endTime }: { endTime: number }) {
 	}
 
 	function formatTime(deltaTime: number) {
-		let hours = Math.floor((deltaTime / 1000 / 60 / 60) % 24);
-		let minutes = Math.floor((deltaTime / 1000 / 60) % 60);
-		let seconds = Math.floor((deltaTime / 1000) % 60);
+		const hours = Math.floor((deltaTime / 1000 / 60 / 60) % 24);
+		const minutes = Math.floor((deltaTime / 1000 / 60) % 60);
+		const seconds = Math.floor((deltaTime / 1000) % 60);
 
 		let strHours = String(hours);
 		let strMinutes = String(minutes);
@@ -50,7 +50,7 @@ export default function TimerSection({ endTime }: { endTime: number }) {
 
 			if (timeRemaining <= 0) {
 				alert(
-					"Your given time to submit the form has finished, to allow other people behind you in the queue to get a chance to register to the event you will be placed back to the queue"
+					"Your given time to submit the form has finished, to allow other people behind you in the queue to get a chance to register to the event you will be placed back to the queue",
 				);
 				clearInterval(intervalId);
 				router.refresh();

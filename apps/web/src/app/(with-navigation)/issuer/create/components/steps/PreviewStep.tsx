@@ -1,6 +1,7 @@
 import { useContext } from "react";
-import { EventFormContext } from "../../page";
+import { EventFormContext } from "../../context/EventFormContext";
 import { plainDate } from "@/utils/time";
+import Image from "next/image";
 
 export default function PreviewStep() {
 	const ctx = useContext(EventFormContext);
@@ -31,7 +32,7 @@ export default function PreviewStep() {
 							plainDate(ctx.event.startDate) +
 								(ctx.event.endDate
 									? " - " + plainDate(ctx.event.endDate)
-									: "")
+									: ""),
 						)}
 					</div>
 				</div>
@@ -43,9 +44,10 @@ export default function PreviewStep() {
 					<div>Thumbnail</div>
 					<div className="text-sm">
 						{ctx.event.thumbnail ? (
-							<img
+							<Image
 								className="aspect-[10/4] object-cover rounded-md w-64"
 								src={ctx.event.thumbnail}
+								alt=""
 							/>
 						) : (
 							<span className="text-gray-400">(empty)</span>
@@ -57,9 +59,10 @@ export default function PreviewStep() {
 					<div className="text-sm">
 						{ctx.event.logo ? (
 							<div className="bg-gray-300 rounded-md w-32 p-2">
-								<img
+								<Image
 									src={ctx.event.logo}
 									className="aspect-square object-contain"
+									alt=""
 								/>
 							</div>
 						) : (

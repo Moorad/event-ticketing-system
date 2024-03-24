@@ -1,5 +1,4 @@
 import { numberFormat } from "@/utils/format";
-import { TicketType } from "database";
 import { useContext } from "react";
 import { TicketsContext } from "../PurchasePage";
 import LoadingButton from "@/components/LoadingButton";
@@ -9,7 +8,7 @@ export default function SummarySection({
 	checkoutHandler,
 }: {
 	submitting: boolean;
-	checkoutHandler: Function;
+	checkoutHandler: () => void;
 }) {
 	const ctx = useContext(TicketsContext);
 

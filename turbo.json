@@ -26,6 +26,7 @@
 			"cache": false,
 			"persistent": true
 		},
+		"prod": {},
 		"db:reset": {},
 		"db:migrate": {},
 		"db:generate": {}

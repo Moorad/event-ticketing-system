@@ -1,6 +1,6 @@
 "use client";
 
-import { Html5Qrcode, Html5QrcodeResult } from "html5-qrcode";
+import { Html5Qrcode } from "html5-qrcode";
 import { Html5QrcodeSupportedFormats } from "html5-qrcode/esm/core";
 import { useEffect, useState } from "react";
 
@@ -23,7 +23,7 @@ export default function Scanner({
 				new Html5Qrcode("reader", {
 					formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],
 					verbose: true,
-				})
+				}),
 			);
 		}
 	}, []);
@@ -38,16 +38,16 @@ export default function Scanner({
 					disableFlip: true,
 				},
 				success,
-				() => {}
-			).catch((err) => {
+				() => {},
+			).catch(() => {
 				setError(
-					"You have not granted camera permission or some API is not supported by your browser"
+					"You have not granted camera permission or some API is not supported by your browser",
 				);
 			});
 		}
 	}, [isCameraOpen]);
 
-	function success(decodedText: string, result: Html5QrcodeResult) {
+	function success(decodedText: string) {
 		const json: QRValueType = JSON.parse(decodedText);
 		QRScanner?.stop();
 		setIsCameraOpen(false);

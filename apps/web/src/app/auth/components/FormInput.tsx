@@ -1,9 +1,4 @@
-import {
-	HTMLInputTypeAttribute,
-	LegacyRef,
-	MutableRefObject,
-	forwardRef,
-} from "react";
+import { HTMLInputTypeAttribute, LegacyRef, forwardRef } from "react";
 
 function FormInput(
 	{
@@ -15,7 +10,7 @@ function FormInput(
 		type: HTMLInputTypeAttribute | undefined;
 		placeholder: string | undefined;
 	},
-	ref: LegacyRef<HTMLInputElement> | undefined
+	ref: LegacyRef<HTMLInputElement> | undefined,
 ) {
 	return (
 		<input

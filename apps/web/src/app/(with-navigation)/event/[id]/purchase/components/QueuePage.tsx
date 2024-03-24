@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { formatTimeLeft } from "@/utils/format";
 import { useEffect, useState } from "react";
 import { Response } from "../page";
@@ -9,9 +9,14 @@ export type QueueInformation = {
 	position: number | null;
 };
 
-
-export default function QueuePage({ info, params }: { info: QueueInformation, params: { id: string } }) {
-	const [queueState, setQueueState] = useState<QueueInformation>(info)
+export default function QueuePage({
+	info,
+	params,
+}: {
+	info: QueueInformation;
+	params: { id: string };
+}) {
+	const [queueState, setQueueState] = useState<QueueInformation>(info);
 	const router = useRouter();
 
 	useEffect(() => {
@@ -26,21 +31,24 @@ export default function QueuePage({ info, params }: { info: QueueInformation, pa
 					uid: 2,
 				}),
 				cache: "no-store",
-			}).then(res => res.json())
+			})
+				.then((res) => res.json())
 				.then((json: Response) => {
-					if (json.status == 'waiting') {
+					if (json.status == "waiting") {
 						setQueueState(json);
 					} else {
-						router.refresh()
+						router.refresh();
 					}
-				})
-		}, 10000)
-	}, [])
+				});
+		}, 10000);
+	}, []);
 
 	return (
 		<div className="flex flex-col max-w-96 gap-5 absolute-center text-brand-black">
 			<div className="flex flex-col">
-				<div className="font-semibold text-center text-3xl">You are in the queue...</div>
+				<div className="font-semibold text-center text-3xl">
+					You are in the queue...
+				</div>
 				<div className="text-center text-gray-500">Event name here</div>
 			</div>
 			<div className="flex flex-col text-center gap-5">
@@ -57,11 +65,16 @@ export default function QueuePage({ info, params }: { info: QueueInformation, pa
 						{queueState.position || "N/A"}
 					</div>
 					<div className="w-1/2 flex flex-col justify-center font-semibold">
-						{queueState.position ? formatTimeLeft(((queueState.position) * (1 / 20)) * 60 * 1000) : "N/A"}
+						{queueState.position
+							? formatTimeLeft(
+									// eslint-disable-next-line indent
+									queueState.position * (1 / 20) * 60 * 1000,
+									// eslint-disable-next-line indent
+								)
+							: "N/A"}
 					</div>
 				</div>
 			</div>
-
 		</div>
 	);
 }

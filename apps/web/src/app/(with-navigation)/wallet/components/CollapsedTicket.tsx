@@ -6,7 +6,7 @@ export default function CollapsedTicket({
 	onClick,
 }: {
 	data: SparseTicket;
-	onClick: Function;
+	onClick: () => void;
 }) {
 	return (
 		<div

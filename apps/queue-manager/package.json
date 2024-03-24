@@ -3,7 +3,8 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "ts-node src/index.ts"
+		"dev": "ts-node src/index.ts",
+		"prod": "ts-node src/index.ts"
 	},
 	"dependencies": {
 		"amqplib": "^0.10.3",

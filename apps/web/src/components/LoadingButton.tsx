@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { MouseEventHandler, ReactNode } from "react";
 
 export default function LoadingButton({
 	children,
@@ -6,14 +6,14 @@ export default function LoadingButton({
 	className,
 	loaderColor = "#FFFFFF",
 	onClick,
-	disabled = false
+	disabled = false,
 }: {
 	children: ReactNode;
 	loading: boolean;
 	className?: string;
 	loaderColor?: string;
-	onClick?: () => any;
-	disabled?: boolean
+	onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
+	disabled?: boolean;
 }) {
 	return (
 		<button

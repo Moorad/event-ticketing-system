@@ -1,0 +1,39 @@
+services:
+    db:
+        image: postgres
+        restart: always
+        ports:
+            - 5432:5432
+        environment:
+            POSTGRES_USER: root
+            POSTGRES_PASSWORD: root
+            POSTGRES_DB: ets-db
+    rabbitmq:
+        image: rabbitmq:management
+        restart: always
+        ports:
+            - 5672:5672
+            - 15672:15672
+        environment:
+            RABBITMQ_DEFAULT_USER: root
+            RABBITMQ_DEFAULT_PASS: root
+    redis:
+        image: redis
+        restart: always
+        ports:
+            - 6379:6379
+    minio:
+        image: bitnami/minio:latest
+        user: root
+        ports:
+            - 9000:9000
+            - 9001:9001
+        environment:
+            - MINIO_ROOT_USER=root
+            - MINIO_ROOT_PASSWORD=rootpassword
+        volumes:
+            - type: bind
+              source: ../minio_data
+              target: /bitnami/minio/data
+              bind:
+                  create_host_path: true

@@ -1,5 +1,6 @@
 "use client";
 import { Event } from "database";
+import Image from "next/image";
 import Link from "next/link";
 import { UIEvent, useEffect, useRef, useState } from "react";
 
@@ -19,7 +20,7 @@ export default function FeaturedEvents({ events }: { events: Event[] }) {
 
 	useEffect(() => {
 		if (scrollableRef.current) {
-			let scrollOption: ScrollToOptions = {
+			const scrollOption: ScrollToOptions = {
 				left: computeScrollLeft(currentEvent),
 				behavior: "smooth",
 			};
@@ -53,13 +54,14 @@ export default function FeaturedEvents({ events }: { events: Event[] }) {
 				className=" w-1/2 min-w-72 flex-shrink-0 featured-event relative"
 			>
 				<Link href={`/event/${event.id}`}>
-					<img
+					<Image
 						src={event.thumbnail}
 						className="rounded-md aspect-[10/4] w-full object-cover"
+						alt=""
 					/>
 					<div className="w-full h-full absolute z-10 top-0 right-0 bg-gradient-to-t from-brand-black to-transparent rounded-md"></div>
 					{event.logo ? (
-						<img
+						<Image
 							src={event.logo}
 							className="absolute bottom-5 left-5 w-1/4 z-20 aspect-square object-contain object-bottom"
 							alt=""

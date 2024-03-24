@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarPlus } from "@fortawesome/free-solid-svg-icons/faCalendarPlus";
 import { faQrcode } from "@fortawesome/free-solid-svg-icons/faQrcode";
 import { Permission, checkPermission } from "@/utils/permissions";
+import Image from "next/image";
 
 const pages = {
 	consumer: [
@@ -63,7 +64,7 @@ export default async function NavigationBar() {
 		<div className="bg-brand-black text-white flex items-center gap-5 px-5 py-2">
 			<Link href="/">
 				<div className="p-2 hover:bg-white/10 rounded">
-					<img src="/logo-dark.svg" className="h-9" />
+					<Image src="/logo-dark.svg" className="h-9" alt="Logo" />
 				</div>
 			</Link>
 			{renderPages()}

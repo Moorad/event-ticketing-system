@@ -8,7 +8,7 @@ export enum Permission {
 
 export async function checkPermission(
 	session: Session | null,
-	permissionId: number
+	permissionId: number,
 ) {
 	// User is not logged in
 	if (!session) {
@@ -31,7 +31,7 @@ export async function checkPermission(
 
 	// Check if role has required permission
 	const hasPermission = userPermissions.role.permissions.some(
-		(p) => p.permissionId == permissionId
+		(p) => p.permissionId == permissionId,
 	);
 
 	return hasPermission;

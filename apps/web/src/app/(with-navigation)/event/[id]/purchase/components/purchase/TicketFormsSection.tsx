@@ -7,7 +7,7 @@ export default function TicketFormsSection({
 	addTicketHandler,
 	error,
 }: {
-	addTicketHandler: Function;
+	addTicketHandler: () => void;
 	error: string | null;
 }) {
 	const ctx = useContext(TicketsContext);

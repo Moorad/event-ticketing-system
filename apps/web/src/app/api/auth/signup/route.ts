@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
 	// Failed validation
 	if (!validBody.success) {
 		const errors = naturalLanguageCombine(
-			validBody.error.issues.map((err) => err.message)
+			validBody.error.issues.map((err) => err.message),
 		);
 		return Response.json(
 			{
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
 			},
 			{
 				status: 403,
-			}
+			},
 		);
 	}
 
@@ -56,14 +56,14 @@ export async function POST(request: NextRequest) {
 			},
 			{
 				status: 403,
-			}
+			},
 		);
 	}
 
 	// Create account
 	const hashedPassword = await bcrypt.hash(
 		validBody.data.password,
-		saltRounds
+		saltRounds,
 	);
 
 	const user = await prisma.user.create({

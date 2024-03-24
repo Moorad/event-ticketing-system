@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import FieldRow from "../FieldRow";
-import { EventFormContext } from "../../page";
+import { EventFormContext } from "../../context/EventFormContext";
 import { updateObjectAt } from "@/utils/transform";
 
 export default function TicketStep() {
@@ -66,7 +66,7 @@ export default function TicketStep() {
 						ctx.setTickets((prev) =>
 							updateObjectAt(prev, currentTicket, {
 								name: e.target.value,
-							})
+							}),
 						);
 					}}
 				/>
@@ -84,7 +84,7 @@ export default function TicketStep() {
 						ctx.setTickets((prev) =>
 							updateObjectAt(prev, currentTicket, {
 								description: e.target.value,
-							})
+							}),
 						);
 					}}
 				/>
@@ -103,7 +103,7 @@ export default function TicketStep() {
 						ctx.setTickets((prev) =>
 							updateObjectAt(prev, currentTicket, {
 								cost: Number(e.target.value),
-							})
+							}),
 						);
 					}}
 				/>

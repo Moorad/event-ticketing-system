@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, ReactNode } from "react";
 
@@ -21,7 +22,7 @@ export default function FormContainer({
 			<div>
 				<div className="text-center">
 					<Link href="/">
-						<img
+						<Image
 							className="w-10 m-auto mb-6"
 							src="/logo-light.svg"
 							alt="logo"

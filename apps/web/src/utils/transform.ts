@@ -8,7 +8,7 @@ export function shuffle<T>(array: T[]) {
 export function updateObjectAt<T>(
 	arr: T[],
 	index: number,
-	newObject: Partial<T>
+	newObject: Partial<T>,
 ) {
 	const item = arr[index];
 

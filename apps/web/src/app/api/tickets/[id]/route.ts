@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 export async function GET(
 	request: NextRequest,
-	{ params }: { params: { id: string } }
+	{ params }: { params: { id: string } },
 ) {
 	const ticket = await prisma.ticket.findUnique({
 		where: {
@@ -34,7 +34,7 @@ export async function GET(
 
 export async function DELETE(
 	request: NextRequest,
-	{ params }: { params: { id: string } }
+	{ params }: { params: { id: string } },
 ) {
 	const json = await request.json();
 
@@ -52,7 +52,7 @@ export async function DELETE(
 			},
 			{
 				status: 400,
-			}
+			},
 		);
 	}
 
@@ -73,7 +73,7 @@ export async function DELETE(
 			},
 			{
 				status: 400,
-			}
+			},
 		);
 	}
 
@@ -86,7 +86,7 @@ export async function DELETE(
 			},
 			{
 				status: 400,
-			}
+			},
 		);
 	}
 

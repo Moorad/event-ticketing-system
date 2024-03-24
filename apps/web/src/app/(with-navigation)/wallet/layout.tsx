@@ -1,4 +1,3 @@
-import NavigationBar from "@/components/navigation-bar/NavigationBar";
 import RequirePermission from "@/components/wrappers/RequirePermission";
 import { Permission } from "@/utils/permissions";
 import { ReactNode } from "react";

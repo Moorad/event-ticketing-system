@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
 								/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/,
 								{
 									message: "Invalid phone format",
-								}
+								},
 							),
 						ticketType: z.string().regex(/^[0-9]+$/),
 						location: z
@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
 							.refine((data) => data >= new Date(), {
 								message: "Date must be in the future",
 							}),
-					})
+					}),
 				)
 				.min(1, {
 					message: "You must add at least one ticket",
@@ -56,18 +56,18 @@ export async function POST(request: NextRequest) {
 	// Failed validation
 	if (!validBody.success) {
 		const errors = new Set(
-			validBody.error.issues.map((err) => err.message)
+			validBody.error.issues.map((err) => err.message),
 		);
 		return Response.json(
 			{
 				status: "error",
 				message: `One or more of you tickets has the following errors: ${Array.from(
-					errors
+					errors,
 				).map((err) => "\n• " + err)}`,
 			},
 			{
 				status: 403,
-			}
+			},
 		);
 	}
 

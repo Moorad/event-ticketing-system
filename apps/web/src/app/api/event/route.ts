@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
 						.string()
 						.min(1, "You must provide a ticket description"),
 					cost: z.number().min(1, "Price must be more than 0 SAR"),
-				})
+				}),
 			),
 		})
 		.safeParse(body);
@@ -61,19 +61,19 @@ export async function POST(req: NextRequest) {
 	// Failed validation
 	if (!validation.success) {
 		const errors = new Set(
-			validation.error.issues.map((err) => err.message)
+			validation.error.issues.map((err) => err.message),
 		);
 
 		return Response.json(
 			{
 				status: "error",
 				message: `Event details and/or ticket details have the following errors: ${Array.from(
-					errors
+					errors,
 				).map((err) => "\n• " + err)}`,
 			},
 			{
 				status: 400,
-			}
+			},
 		);
 	}
 

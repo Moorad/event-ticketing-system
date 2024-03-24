@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, createContext, useState } from "react";
+import { useState } from "react";
 import StepsView from "./components/StepsView";
 import { Event, TicketType } from "database";
 import StepRenderer, { steps } from "./components/StepRenderer";
@@ -9,32 +9,13 @@ import useFetch from "@/utils/hooks/useFetch";
 import FormError from "@/app/auth/components/FormError";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { EventFormContext } from "./context/EventFormContext";
 
-type BasicEvent = Pick<
+export type BasicEvent = Pick<
 	Event,
 	"name" | "description" | "startDate" | "endDate" | "thumbnail" | "logo"
 > & { location: string };
-type BasicTicketType = Pick<TicketType, "name" | "description" | "cost">;
-
-export const EventFormContext = createContext<{
-	event: BasicEvent;
-	setEvent: Dispatch<SetStateAction<BasicEvent>>;
-	tickets: BasicTicketType[];
-	setTickets: Dispatch<SetStateAction<BasicTicketType[]>>;
-}>({
-	event: {
-		name: "",
-		description: "",
-		startDate: new Date(),
-		endDate: null,
-		logo: null,
-		thumbnail: "",
-		location: "",
-	},
-	setEvent: () => {},
-	tickets: [],
-	setTickets: () => {},
-});
+export type BasicTicketType = Pick<TicketType, "name" | "description" | "cost">;
 
 export default function issuerCreate() {
 	const [currentStep, setCurrentStep] = useState(0);
@@ -54,7 +35,7 @@ export default function issuerCreate() {
 			cost: 0,
 		},
 	]);
-	const { loading, error, request } = useFetch();
+	const { error, request } = useFetch();
 	const session = useSession();
 	const router = useRouter();
 

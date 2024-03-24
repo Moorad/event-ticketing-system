@@ -73,7 +73,7 @@ export default function PurchasePage({
 						}
 						return acc;
 					},
-					{} as Record<string, string>
+					{} as Record<string, string>,
 				);
 				allFormData.push(formData);
 			}

@@ -6,6 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { prisma } from "database";
+import Image from "next/image";
 import Link from "next/link";
 
 export default async function eventIdPage({
@@ -40,7 +41,7 @@ export default async function eventIdPage({
 		<div className="flex justify-center items-center flex-grow overflow-hidden">
 			<div className="h-full p-5">
 				<div className="max-w-[800px] h-full light-drop-shadow rounded-md p-5 bg-white overflow-y-auto">
-					<img
+					<Image
 						className="w-full aspect-[4/1] object-cover rounded-md"
 						src={data.thumbnail}
 						alt=""

@@ -3,9 +3,11 @@ export function numberFormat(num: number, dp: number) {
 }
 
 export function formatTimeLeft(milliseconds: number) {
-	let minutes = Math.floor(milliseconds / 1000 / 60) % 60;
-	let hours = Math.floor(milliseconds / 1000 / 60 / 60);
+	const minutes = Math.floor(milliseconds / 1000 / 60) % 60;
+	const hours = Math.floor(milliseconds / 1000 / 60 / 60);
+
 	let formattedString = "";
+
 	if (hours > 0) {
 		formattedString += hours + "h";
 	}

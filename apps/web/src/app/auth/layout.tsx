@@ -1,9 +1,10 @@
+import Image from "next/image";
 import { ReactNode } from "react";
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
 	return (
 		<div className="h-screen overflow-hidden">
-			<img
+			<Image
 				className="absolute w-full h-full object-cover"
 				src="/blobs.svg"
 				alt="blobs"

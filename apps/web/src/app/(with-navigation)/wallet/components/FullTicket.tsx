@@ -5,7 +5,7 @@ import { extractTimeElements } from "@/utils/time";
 
 export default function FullTicket({ data }: { data: DetailedTicket }) {
 	const { year, month, day, hour, minute } = extractTimeElements(
-		new Date(data.bookedDate)
+		new Date(data.bookedDate),
 	);
 
 	return (

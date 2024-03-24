@@ -12,7 +12,7 @@ type ReqBodyType = {
 export async function POST(request: NextRequest) {
 	const body = (await request.json()) as ReqBodyType;
 
-	let payload: Prisma.TicketCreateManyInput[] = [];
+	const payload: Prisma.TicketCreateManyInput[] = [];
 
 	for (let i = 0; i < body.tickets.length; i++) {
 		payload.push({

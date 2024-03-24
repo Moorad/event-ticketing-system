@@ -16,9 +16,9 @@ export default function SearchEvents({
 	initValue: EventAndCheapestTicket[];
 }) {
 	const [events, setEvents] = useState(initValue);
-	const { loading, error, request } = useFetch();
+	const { loading, request } = useFetch();
 
-	async function handleSearchQuery(query: String) {
+	async function handleSearchQuery(query: string) {
 		if (query.length < 1) {
 			setEvents(initValue);
 			return;
